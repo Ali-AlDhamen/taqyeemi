@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:taqyeemi/screens/sign_in_screen.dart';
 import 'package:taqyeemi/screens/sign_up_screen.dart';
+
 import 'package:taqyeemi/theme/pallete.dart';
 
 void main() {
@@ -15,7 +17,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: Pallete.darkModeAppTheme,
       title: 'Taqyeemi',
-      home: const SignUpScreen(),
+      home: const SignInScreen(),
+      routes: {
+        SignUpScreen.routeName: (context) => const SignUpScreen(),
+        SignInScreen.routeName: (context) => const SignInScreen(),
+      },
     );
   }
 }
