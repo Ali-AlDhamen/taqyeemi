@@ -45,6 +45,7 @@ dependencies:
   circle_nav_bar: ^2.0.1+1
   flutter_native_splash: ^2.2.16
   awesome_snackbar_content: ^0.1.0
+  cloud_firestore: ^4.3.1
 
 dev_dependencies:
   flutter_test:

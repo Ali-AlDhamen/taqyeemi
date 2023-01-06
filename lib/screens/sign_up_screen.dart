@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taqyeemi/screens/sign_in_screen.dart';
 
+import '../Auth/auth.dart';
 import '../theme/pallete.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -190,6 +191,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: TextButton(
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
+                            Auth.signUp(
+                                _emailController.text.trim(),
+                                _passwordController.text.trim(),
+                                _fullNameController.text.trim(),
+                                _mobileNumberController.text.trim(),
+                                context);
                           }
                         },
                         child: const Text(
@@ -217,7 +224,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+                            Navigator.pushReplacementNamed(
+                                context, SignInScreen.routeName);
                           },
                           child: const Text(
                             "Sign In",

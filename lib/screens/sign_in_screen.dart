@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taqyeemi/screens/sign_up_screen.dart';
 
+import '../Auth/auth.dart';
 import '../theme/pallete.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -149,6 +150,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: TextButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
+                          Auth.loginIn(_emailController.text.trim(),
+                              _passwordController.text.trim(), context);
                         }
                       },
                       child: const Text(
@@ -179,7 +182,6 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                      
                             Image.network(
                               "https://companieslogo.com/img/orig/GOOG-0ed88f7c.png?t=1633218227",
                               height: 20,
@@ -188,7 +190,6 @@ class _SignInScreenState extends State<SignInScreen> {
                             const SizedBox(
                               width: 10,
                             ),
-
                             const Text(
                               "Sign In with Google",
                               style: TextStyle(
@@ -217,7 +218,8 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, SignUpScreen.routeName);
+                          Navigator.pushReplacementNamed(
+                              context, SignUpScreen.routeName);
                         },
                         child: const Text(
                           "Sign Up",
