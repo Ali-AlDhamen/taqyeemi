@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "169856208323",
+    "project_id": "taqyeemi-fe926",
+    "storage_bucket": "taqyeemi-fe926.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169856208323:android:ea72964678dcf7d59b0176",
+        "android_client_info": {
+          "package_name": "com.example.taqyeemi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169856208323-gonqcu2jcbiu20ftckl7qj30kgr99pmh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr-pEfTSUrGbt-Pkm_RG8bGDxKZqX7K1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169856208323-gonqcu2jcbiu20ftckl7qj30kgr99pmh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
