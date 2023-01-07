@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/NavigationDrawer.dart';
+
 class HomeScreen extends StatefulWidget {
   static const String routeName = "/home_screen";
 
@@ -20,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('Home'),
       ),
+      drawer: NavigationDrawer(),
       body:  Column(
         children: [
           const Text('Welcome to Home Screen'),

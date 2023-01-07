@@ -42,7 +42,7 @@ class Auth {
     }
   }
 
-  static Future<void> signUp(
+  static Future<void> signUp  (
       String email, String password, String name, String phoneNo ,BuildContext context) async {
     try {
       UserCredential authResult = await _auth.createUserWithEmailAndPassword(
