@@ -4,16 +4,17 @@ import 'package:flutter/material.dart';
 
 import '../widgets/NavigationDrawer.dart';
 
-class HomeScreen extends StatefulWidget {
-  static const String routeName = "/home_screen";
+class InstructorsScreen extends StatefulWidget {
+  static const String routeName = "/instructors_screen";
 
-  const HomeScreen({super.key});
+  const InstructorsScreen({super.key});
 
+  
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<InstructorsScreen> createState() => _InstructorsScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _InstructorsScreenState extends State<InstructorsScreen> {
   
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:taqyeemi/screens/home_screen.dart';
+import 'package:taqyeemi/screens/add_new_course_screen.dart';
+import 'package:taqyeemi/screens/add_new_instructor_screen.dart';
+import 'package:taqyeemi/screens/contact_screen.dart';
+import 'package:taqyeemi/screens/courses_screen.dart';
+import 'package:taqyeemi/screens/instructors_screen.dart';
 import 'package:taqyeemi/screens/sign_in_screen.dart';
 import 'package:taqyeemi/screens/sign_up_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -28,7 +32,7 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return const HomeScreen();
+            return const InstructorsScreen();
           } else {
             return const SignInScreen();
           }
@@ -37,7 +41,12 @@ class MyApp extends StatelessWidget {
       routes: {
         SignUpScreen.routeName: (context) => const SignUpScreen(),
         SignInScreen.routeName: (context) => const SignInScreen(),
-        HomeScreen.routeName: (context) => const HomeScreen(),
+        InstructorsScreen.routeName: (context) => const InstructorsScreen(),
+        CoursesScreen.routeName: (context) => const CoursesScreen(),
+        AddNewInstructorScreen.routeName: (context) =>
+            const AddNewInstructorScreen(),
+        AddNewCourseScreen.routeName: (context) => const AddNewCourseScreen(),
+        ContactScreen.routeName: (context) => const ContactScreen(),
       },
     );
   }
