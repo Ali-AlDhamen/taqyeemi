@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/NavigationDrawer.dart';
+
 
 class InstructorsScreen extends StatefulWidget {
   static const String routeName = "/instructors_screen";
@@ -23,13 +23,13 @@ class _InstructorsScreenState extends State<InstructorsScreen> {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      drawer: NavigationDrawer(),
+      drawer: const AppNavigationDrawer(),
       body:  Column(
         children: [
-          const Text('Welcome to Home Screen'),
+           Text(FirebaseAuth.instance.currentUser!.uid),
           ElevatedButton(
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
+            onPressed: ()async{
+             await FirebaseAuth.instance.signOut();
             },
             child: const Text('Sign Out'),
           ),

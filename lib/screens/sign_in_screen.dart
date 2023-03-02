@@ -19,6 +19,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final formKey = GlobalKey<FormState>();
 
   bool _passwordVisible = false;
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -148,20 +149,28 @@ class _SignInScreenState extends State<SignInScreen> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: TextButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        setState(() {
+                          _isLoading = true;
+                        });
                         if (formKey.currentState!.validate()) {
-                          Auth.loginIn(_emailController.text.trim(),
+                          await Auth.loginIn(_emailController.text.trim(),
                               _passwordController.text.trim(), context);
                         }
+                        setState(() {
+                          _isLoading = false;
+                        });
                       },
-                      child: const Text(
-                        "Sign In",
-                        style: TextStyle(
-                          color: Pallete.whiteColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      child: _isLoading
+                          ? const CircularProgressIndicator()
+                          : const Text(
+                              "Sign In",
+                              style: TextStyle(
+                                color: Pallete.whiteColor,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                     ),
                   ),
                   const SizedBox(

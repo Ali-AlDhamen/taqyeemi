@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:taqyeemi/Auth/auth.dart';
 import 'package:taqyeemi/screens/add_new_instructor_screen.dart';
@@ -7,8 +8,8 @@ import 'package:taqyeemi/screens/instructors_screen.dart';
 
 import '../screens/add_new_course_screen.dart';
 
-class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({super.key});
+class AppNavigationDrawer extends StatelessWidget {
+  const AppNavigationDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,6 @@ class NavigationDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-              child: Expanded(
             child: Column(
               children: [
                 Image.asset("assets/images/logo.png", width: 200, height: 100),
@@ -37,7 +37,7 @@ class NavigationDrawer extends StatelessWidget {
                 ),
               ],
             ),
-          )),
+          ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
@@ -47,7 +47,8 @@ class NavigationDrawer extends StatelessWidget {
                   leading: const Icon(Icons.people_outline),
                   title: const Text('Instructors'),
                   onTap: () {
-                    Navigator.pushReplacementNamed(context, InstructorsScreen.routeName);
+                    Navigator.pushReplacementNamed(
+                        context, InstructorsScreen.routeName);
                   },
                 ),
 
@@ -55,7 +56,8 @@ class NavigationDrawer extends StatelessWidget {
                   leading: const Icon(Icons.menu_book),
                   title: const Text('Courses'),
                   onTap: () {
-                    Navigator.pushReplacementNamed(context, CoursesScreen.routeName);
+                    Navigator.pushReplacementNamed(
+                        context, CoursesScreen.routeName);
                   },
                 ),
 
@@ -78,14 +80,16 @@ class NavigationDrawer extends StatelessWidget {
                   leading: const Icon(Icons.contact_support_outlined),
                   title: const Text('Contact Us'),
                   onTap: () {
-                    Navigator.pushReplacementNamed(context, ContactScreen.routeName);
+                    Navigator.pushReplacementNamed(
+                        context, ContactScreen.routeName);
                   },
                 ),
                 ListTile(
                   leading: const Icon(Icons.logout),
                   title: const Text('Log Out'),
-                  onTap: () {
-                    Auth.logout();
+                  onTap: () async {
+                    await FirebaseAuth.instance.signOut();
+                    // Navigator.pushReplacementNamed(context, '/');
                   },
                 ),
               ],

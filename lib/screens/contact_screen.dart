@@ -14,7 +14,7 @@ class ContactScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Contact'),
       ),
-      drawer: NavigationDrawer(),
+      drawer: const AppNavigationDrawer(),
       body: const Center(
         child: Text('Contact Screen'),
       ),

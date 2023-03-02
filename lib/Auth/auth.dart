@@ -28,10 +28,10 @@ class Auth {
   static Future<void> loginIn(
       String email, String password, BuildContext context) async {
     try {
-      UserCredential authResult = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
+      UserCredential authResult = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
       userId = authResult.user!.uid;
-    } on PlatformException catch (e) {
+    } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         showsnackbar(context, "No user found for that email.");
       } else if (e.code == 'wrong-password') {
@@ -42,8 +42,8 @@ class Auth {
     }
   }
 
-  static Future<void> signUp  (
-      String email, String password, String name, String phoneNo ,BuildContext context) async {
+  static Future<void> signUp(String email, String password, String name,
+      String phoneNo, BuildContext context) async {
     try {
       UserCredential authResult = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -58,7 +58,7 @@ class Auth {
         'email': email,
         'phoneNo': phoneNo,
       });
-    } on PlatformException catch (e) {
+    } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         showsnackbar(context, "The password provided is too weak.");
       } else if (e.code == 'email-already-in-use') {

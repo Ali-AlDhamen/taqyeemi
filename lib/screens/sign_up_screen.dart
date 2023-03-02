@@ -189,9 +189,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: TextButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (formKey.currentState!.validate()) {
-                            Auth.signUp(
+                            await Auth.signUp(
                                 _emailController.text.trim(),
                                 _passwordController.text.trim(),
                                 _fullNameController.text.trim(),

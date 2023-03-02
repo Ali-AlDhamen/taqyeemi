@@ -13,7 +13,7 @@ class CoursesScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Courses'),
       ),
-      drawer: NavigationDrawer(),
+      drawer: const AppNavigationDrawer(),
       body: const Center(
         child: Text('Courses Screen'),
       ),

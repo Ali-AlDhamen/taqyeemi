@@ -43,10 +43,11 @@ class MyApp extends StatelessWidget {
         SignInScreen.routeName: (context) => const SignInScreen(),
         InstructorsScreen.routeName: (context) => const InstructorsScreen(),
         CoursesScreen.routeName: (context) => const CoursesScreen(),
-        AddNewInstructorScreen.routeName: (context) =>
-            const AddNewInstructorScreen(),
+        AddNewInstructorScreen.routeName: (context) => const AddNewInstructorScreen(),
         AddNewCourseScreen.routeName: (context) => const AddNewCourseScreen(),
         ContactScreen.routeName: (context) => const ContactScreen(),
+        
+        
       },
     );
   }
