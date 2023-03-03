@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -58,7 +56,7 @@ class Auth {
         'email': email,
         'phoneNo': phoneNo,
       });
-      
+
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         showsnackbar(context, "The password provided is too weak.");

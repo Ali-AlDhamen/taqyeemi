@@ -1,7 +1,7 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 
-void showSnakeBar(BuildContext context, String message) {
+void showSnackBar(BuildContext context, String message) {
   final snackBar = SnackBar(
     elevation: 0,
     behavior: SnackBarBehavior.floating,
