@@ -58,6 +58,7 @@ class Auth {
         'email': email,
         'phoneNo': phoneNo,
       });
+      
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         showsnackbar(context, "The password provided is too weak.");

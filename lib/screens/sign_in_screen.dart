@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taqyeemi/screens/instructors_screen.dart';
 import 'package:taqyeemi/screens/sign_up_screen.dart';
 
 import '../Auth/auth.dart';
@@ -156,6 +157,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         if (formKey.currentState!.validate()) {
                           await Auth.loginIn(_emailController.text.trim(),
                               _passwordController.text.trim(), context);
+                          // nav to courses screen
                         }
                         setState(() {
                           _isLoading = false;
