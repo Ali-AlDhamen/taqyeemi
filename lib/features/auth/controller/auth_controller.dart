@@ -39,7 +39,7 @@ class AuthController extends StateNotifier<bool> {
     return _authRepository.getUserData(uid);
   }
 
-  Future<void> signUpWithEmail(
+  void signUpWithEmail(
       {required String email,
       required String password,
       required String name,
@@ -59,7 +59,7 @@ class AuthController extends StateNotifier<bool> {
             _ref.read(userProvider.notifier).update((state) => userModel));
   }
 
-  Future<void> signInWithEmail(
+  void signInWithEmail(
       {required String email,
       required String password,
       required BuildContext context}) async {
@@ -77,7 +77,7 @@ class AuthController extends StateNotifier<bool> {
             _ref.read(userProvider.notifier).update((state) => userModel));
   }
 
-  Future<void> logout() async {
+  void logout()  {
      _authRepository.logout();
     _ref.read(userProvider.notifier).update((state) => null);
   }

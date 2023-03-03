@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taqyeemi/screens/add_new_course_screen.dart';
 import 'package:taqyeemi/screens/add_new_instructor_screen.dart';
 import 'package:taqyeemi/screens/contact_screen.dart';
@@ -8,6 +9,7 @@ import 'package:taqyeemi/screens/instructors_screen.dart';
 import 'package:taqyeemi/screens/sign_in_screen.dart';
 import 'package:taqyeemi/screens/sign_up_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'features/auth/screens/login_screen.dart';
 import 'firebase_options.dart';
 import 'package:taqyeemi/theme/pallete.dart';
 
@@ -16,7 +18,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(const ProviderScope(child:  MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -28,16 +30,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: Pallete.darkModeAppTheme,
       title: 'Taqyeemi',
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return const InstructorsScreen();
-          } else {
-            return const SignInScreen();
-          }
-        },
-      ),
+      home: const LoginScreen(),
       routes: {
         SignUpScreen.routeName: (context) => const SignUpScreen(),
         SignInScreen.routeName: (context) => const SignInScreen(),
