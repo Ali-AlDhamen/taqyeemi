@@ -10,7 +10,7 @@ class Loader extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: SpinKitPouringHourGlassRefined(
-        color: Pallete.purpleColor,
+        color: Pallete.whiteColor,
         size: 50.0,
       ),
     );

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taqyeemi/features/auth/controller/auth_controller.dart';
 import 'package:taqyeemi/screens/sign_up_screen.dart';
 
+import '../../../core/common/loader.dart';
 import '../../../theme/pallete.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -21,7 +22,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   bool _passwordVisible = false;
 
-  void SignInWithEmail(WidgetRef ref, BuildContext context) {
+  void SignInWithEmail( BuildContext context) {
     if (formKey.currentState!.validate()) {
       ref.read(authControllerProvider.notifier).signInWithEmail(
           email: _emailController.text.trim(),
@@ -166,9 +167,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: TextButton(
-                      onPressed: () => SignInWithEmail(ref, context),
+                      onPressed: () => SignInWithEmail(context),
                       child: isLoading
-                          ? const CircularProgressIndicator()
+                          ? const Loader()
                           : const Text(
                               "Sign In",
                               style: TextStyle(

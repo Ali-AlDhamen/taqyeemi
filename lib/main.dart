@@ -7,9 +7,9 @@ import 'package:taqyeemi/screens/contact_screen.dart';
 import 'package:taqyeemi/screens/courses_screen.dart';
 import 'package:taqyeemi/screens/instructors_screen.dart';
 import 'package:taqyeemi/screens/sign_in_screen.dart';
-import 'package:taqyeemi/screens/sign_up_screen.dart';
+
 import 'package:firebase_core/firebase_core.dart';
-import 'features/auth/screens/login_screen.dart';
+import 'features/auth/screens/signup_screen.dart';
 import 'firebase_options.dart';
 import 'package:taqyeemi/theme/pallete.dart';
 
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: Pallete.darkModeAppTheme,
       title: 'Taqyeemi',
-      home: const LoginScreen(),
+      home: const SignUpScreen(),
       routes: {
         SignUpScreen.routeName: (context) => const SignUpScreen(),
         SignInScreen.routeName: (context) => const SignInScreen(),
