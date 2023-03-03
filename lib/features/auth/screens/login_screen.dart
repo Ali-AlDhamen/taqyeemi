@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taqyeemi/features/auth/controller/auth_controller.dart';
+import 'package:taqyeemi/features/auth/screens/signup_screen.dart';
 
 import '../../../core/common/loader.dart';
 import '../../../theme/pallete.dart';
 
-class LoginScreen extends ConsumerStatefulWidget {
+class SignInScreen extends ConsumerStatefulWidget {
   static const String routeName = "/sign_in_screen";
-  const LoginScreen({super.key});
+  const SignInScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LoginScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SignInScreenState();
 }
 
-class _LoginScreenState extends ConsumerState<LoginScreen> {
+class _SignInScreenState extends ConsumerState<SignInScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -21,7 +22,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   bool _passwordVisible = false;
 
-  void SignInWithEmail( BuildContext context) {
+
+  void signInWithEmail( BuildContext context) {
     if (formKey.currentState!.validate()) {
       ref.read(authControllerProvider.notifier).signInWithEmail(
           email: _emailController.text.trim(),
@@ -29,7 +31,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           context: context);
     }
   }
-
+  @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
@@ -166,7 +168,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: TextButton(
-                      onPressed: () => SignInWithEmail(context),
+                      onPressed: () => signInWithEmail(context),
                       child: isLoading
                           ? const Loader()
                           : const Text(
@@ -233,8 +235,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-                          // Navigator.pushReplacementNamed(
-                          //     context, SignUpScreen.routeName);
+                          Navigator.pushReplacementNamed(
+                              context, SignUpScreen.routeName);
                         },
                         child: const Text(
                           "Sign Up",
