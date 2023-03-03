@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:taqyeemi/screens/sign_in_screen.dart';
 
 import '../../../theme/pallete.dart';
 import '../controller/auth_controller.dart';
@@ -230,8 +229,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, SignInScreen.routeName);
+                            // Navigator.pushReplacementNamed(
+                            //     context, SignInScreen.routeName);
                           },
                           child: const Text(
                             "Sign In",
