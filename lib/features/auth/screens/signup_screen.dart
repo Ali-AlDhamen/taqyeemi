@@ -205,14 +205,16 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       ),
                       child: TextButton(
                         onPressed: () => signUpWithEmail(context),
-                        child: isLoading ? const Loader() :const Text(
-                          "Sign Up",
-                          style: TextStyle(
-                            color: Pallete.whiteColor,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        child: isLoading
+                            ? const Loader()
+                            : const Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                  color: Pallete.whiteColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                       ),
                     ),
                     const SizedBox(
@@ -230,8 +232,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, SignInScreen.routeName);
+                            Navigator.pop(context);
                           },
                           child: const Text(
                             "Sign In",

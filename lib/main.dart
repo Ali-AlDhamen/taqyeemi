@@ -19,11 +19,16 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends ConsumerWidget {
+GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey=GlobalKey<ScaffoldMessengerState>();
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
-
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Pallete.darkModeAppTheme,
@@ -31,14 +36,16 @@ class MyApp extends ConsumerWidget {
       home: ref.watch(authStateChangeProvider).when(
             data: (data) {
               if (data != null) {
-                return const InstructorsScreen();
-              } else {
-                return const SignInScreen();
+                print(data);
+                print("Radwan");
+                return const InstructorsScreen();     
               }
+              return const SignInScreen();
             },
             error: (error, StackTrace) => ErrorText(error: error.toString()),
             loading: () => const Loader(),
           ),
+      scaffoldMessengerKey: scaffoldMessengerKey,
       routes: {
         SignUpScreen.routeName: (context) => const SignUpScreen(),
         SignInScreen.routeName: (context) => const SignInScreen(),

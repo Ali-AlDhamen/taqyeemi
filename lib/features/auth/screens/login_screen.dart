@@ -31,11 +31,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
           context: context);
     }
   }
+
   @override
   void dispose() {
-    super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -235,8 +236,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(
-                              context, SignUpScreen.routeName);
+                          Navigator.of(context)
+                                .pushNamed(SignUpScreen.routeName);
                         },
                         child: const Text(
                           "Sign Up",

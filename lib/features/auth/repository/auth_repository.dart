@@ -59,8 +59,8 @@ class AuthRepository {
     try {
       UserCredential authResult = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-
       final userId = authResult.user!.uid;
+
 
       UserModel userModel = await getUserData(userId).first;
 
@@ -73,8 +73,9 @@ class AuthRepository {
   }
 
   Stream<UserModel> getUserData(String uid) {
-    return _users.doc(uid).snapshots().map(
-        (event) => UserModel.fromMap(event.data() as Map<String, dynamic>));
+    return _users.doc(uid).snapshots().map((event) {
+      return UserModel.fromMap(event.data() as Map<String , dynamic>);
+    });
   }
 
   void logout() async {

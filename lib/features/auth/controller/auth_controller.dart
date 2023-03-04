@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/utils.dart';
 import '../../../models/user_model.dart';
+import '../../../screens/instructors_screen.dart';
 import '../repository/auth_repository.dart';
+import '../screens/login_screen.dart';
 
 final userProvider = StateProvider<UserModel?>((ref) => null);
 
@@ -14,15 +16,14 @@ final authControllerProvider = StateNotifierProvider<AuthController, bool>(
     ref: ref,
   ),
 );
+final getUserDataProvider = StreamProvider.family((ref, String uid) {
+  final authController = ref.watch(authControllerProvider.notifier);
+  return authController.getUserData(uid);
+});
 
 final authStateChangeProvider = StreamProvider((ref) {
   final authController = ref.watch(authControllerProvider.notifier);
   return authController.authStateChange;
-});
-
-final getUserDataProvider = StreamProvider.family((ref, String uid) {
-  final authController = ref.watch(authControllerProvider.notifier);
-  return authController.getUserData(uid);
 });
 
 class AuthController extends StateNotifier<bool> {
@@ -54,9 +55,10 @@ class AuthController extends StateNotifier<bool> {
         (l) => showSnackBar(
               context,
               l.message,
-            ),
-        (userModel) =>
-            _ref.read(userProvider.notifier).update((state) => userModel));
+            ), (userModel) {
+      _ref.read(userProvider.notifier).update((state) => userModel);
+      Navigator.pop(context);
+    });
   }
 
   void signInWithEmail(
@@ -64,8 +66,8 @@ class AuthController extends StateNotifier<bool> {
       required String password,
       required BuildContext context}) async {
     state = true;
-    final user = await _authRepository.signInWithEmail(
-        email: email, password: password);
+    final user =
+        await _authRepository.signInWithEmail(email: email, password: password);
 
     state = false;
     user.fold(
@@ -77,10 +79,8 @@ class AuthController extends StateNotifier<bool> {
             _ref.read(userProvider.notifier).update((state) => userModel));
   }
 
-  void logout()  {
-     _authRepository.logout();
+  void logout(BuildContext context) {
+    _authRepository.logout();
     _ref.read(userProvider.notifier).update((state) => null);
   }
-
-
 }
