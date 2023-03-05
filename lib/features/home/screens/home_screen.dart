@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 
 import '../../../theme/pallete.dart';
+import '../drawers/navigation_drawer.dart';
 import 'courses_screen.dart';
 import 'instructors_screen.dart';
 
@@ -21,28 +22,35 @@ class _HomeScreenState extends State<HomeScreen> {
     const InstructorsScreen(),
   ];
 
-  void _handleNavigationChange(int index){
+  void _handleNavigationChange(int index) {
     setState(() {
-    
       _child = _children[index];
     });
   }
+
+  void displayDrawer(BuildContext context) {
+    Scaffold.of(context).openDrawer();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Screen'),
+        title: const Text('Taqyeemi'),
+        centerTitle: false,
+        leading: Builder(builder: (context) {
+          return IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () => displayDrawer(context),
+          );
+        }),
       ),
       body: _child,
-
-    bottomNavigationBar: FluidNavBar(
-       
-        
+      bottomNavigationBar: FluidNavBar(
         style: const FluidNavBarStyle(
           barBackgroundColor: Pallete.grayColor,
           iconSelectedForegroundColor: Pallete.purpleColor,
         ),
-        
         onChange: _handleNavigationChange,
         icons: [
           FluidNavBarIcon(
@@ -51,10 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
           FluidNavBarIcon(
             icon: Icons.people_outline_rounded,
           ),
-         
         ],
       ),
-
+      drawer: const AppNavigationDrawer(),
     );
   }
 }
