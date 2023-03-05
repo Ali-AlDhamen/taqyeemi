@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:taqyeemi/core/common/loader.dart';
-import 'package:taqyeemi/screens/instructors_screen.dart';
 import 'core/common/error_text.dart';
 import 'features/auth/controller/auth_controller.dart';
+import 'features/home/screens/home_screen.dart';
 import 'features/auth/screens/login_screen.dart';
 import 'features/auth/screens/signup_screen.dart';
 import 'firebase_options.dart';
@@ -36,20 +36,19 @@ class _MyAppState extends ConsumerState<MyApp> {
       home: ref.watch(authStateChangeProvider).when(
             data: (data) {
               if (data != null) {
-                print(data);
-                print("Radwan");
-                return const InstructorsScreen();     
+                return const HomeScreen();     
               }
               return const SignInScreen();
             },
-            error: (error, StackTrace) => ErrorText(error: error.toString()),
+            error: (error, stackTrace) => ErrorText(error: error.toString()),
             loading: () => const Loader(),
           ),
       scaffoldMessengerKey: scaffoldMessengerKey,
       routes: {
         SignUpScreen.routeName: (context) => const SignUpScreen(),
         SignInScreen.routeName: (context) => const SignInScreen(),
-        InstructorsScreen.routeName: (context) => const InstructorsScreen()
+        HomeScreen.routeName: (context) => const HomeScreen(),
+        
       },
     );
   }

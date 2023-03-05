@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:taqyeemi/features/auth/screens/login_screen.dart';
+
 
 import '../../../theme/pallete.dart';
 import '../controller/auth_controller.dart';

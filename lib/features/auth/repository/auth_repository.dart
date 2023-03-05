@@ -47,6 +47,7 @@ class AuthRepository {
       await _users.doc(userId).set(userModel.toMap());
 
       return Right(userModel);
+    // ignore: unused_catch_clause
     } on FirebaseAuthException catch (e) {
       rethrow;
     } catch (e) {
@@ -65,6 +66,7 @@ class AuthRepository {
       UserModel userModel = await getUserData(userId).first;
 
       return Right(userModel);
+    // ignore: unused_catch_clause
     } on FirebaseAuthException catch (e) {
       rethrow;
     } catch (e) {

@@ -4,9 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/utils.dart';
 import '../../../models/user_model.dart';
-import '../../../screens/instructors_screen.dart';
 import '../repository/auth_repository.dart';
-import '../screens/login_screen.dart';
+
 
 final userProvider = StateProvider<UserModel?>((ref) => null);
 

@@ -26,6 +26,8 @@ dependencies:
   routemaster: ^1.0.1
   fpdart: ^0.4.1
   flutter_spinkit: ^5.1.0
+  fluid_bottom_nav_bar: ^1.4.0
+  google_fonts: ^4.0.3
 
 dev_dependencies:
   flutter_test:
