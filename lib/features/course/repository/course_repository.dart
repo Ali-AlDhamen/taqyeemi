@@ -38,4 +38,19 @@ class CourseRepository {
       return left(Failure(e.toString()));
     }
   }
+
+  Stream<List<Course>> getCourses() {
+    return _courses.snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return Course.fromMap(doc.data() as Map<String, dynamic>);
+      }).toList();
+    });
+  }
+
+  Stream<Course> getCourseByName(String name) {
+    return _courses.doc(name).snapshots().map((snapshot) {
+      return Course.fromMap(snapshot.data() as Map<String, dynamic>);
+    });
+  }
+
 }

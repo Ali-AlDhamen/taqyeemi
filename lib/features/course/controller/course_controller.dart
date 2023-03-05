@@ -13,6 +13,16 @@ final courseControllerProvider = StateNotifierProvider<CourseController , bool>(
   );
 });
 
+
+final courseByNameProvider = StreamProvider.family((ref,String name) {
+  return ref.watch(courseControllerProvider.notifier).getCourseByName(name);
+});
+
+
+final coursesProvider = StreamProvider((ref) {
+  return ref.watch(courseControllerProvider.notifier).getCourses();
+});
+
 class CourseController extends StateNotifier<bool> {
   final CourseRepository _courseRepository;
   final Ref _ref;
@@ -38,4 +48,15 @@ class CourseController extends StateNotifier<bool> {
       Navigator.pop(context);
     });
   }
+
+
+  Stream<List<Course>> getCourses() {
+    return _courseRepository.getCourses();
+  }
+
+  Stream<Course> getCourseByName(String name) {
+    return _courseRepository.getCourseByName(name);
+  }
+
+
 }
