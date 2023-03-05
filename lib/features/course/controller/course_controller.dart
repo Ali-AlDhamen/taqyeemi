@@ -22,8 +22,8 @@ class CourseController extends StateNotifier<bool> {
         _ref = ref,
         super(false);
 
-  void addCourse(String courseName, String courseCode, int courseCreditHours,
-      BuildContext context) async {
+  void addCourse({ required String courseName, required String courseCode, required int courseCreditHours,
+      required BuildContext context}) async {
     state = true;
     Course course = Course(
         id: courseCode,

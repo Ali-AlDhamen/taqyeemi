@@ -27,7 +27,12 @@ class _NewCourseScreenState extends ConsumerState<NewCourseScreen> {
     _courseCreditHoursController.dispose();
   }
 
-  void addCourse() {}
+  void addCourse() {
+    final courseName = _courseNameController.text;
+    final courseCode = _courseCodeController.text;
+    final courseCreditHours = _courseCreditHoursController.text;
+    ref.read(courseControllerProvider.notifier).addCourse(courseName: courseName, courseCode: courseCode, courseCreditHours: int.parse(courseCreditHours), context: context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +56,7 @@ class _NewCourseScreenState extends ConsumerState<NewCourseScreen> {
               TextField(
                 controller: _courseNameController,
                 decoration: const InputDecoration(
-                  hintText: 'course name',
+                  hintText: 'course name e.g intro to programming',
                   filled: true,
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.all(18),
@@ -69,7 +74,7 @@ class _NewCourseScreenState extends ConsumerState<NewCourseScreen> {
               TextField(
                 controller: _courseCodeController,
                 decoration: const InputDecoration(
-                  hintText: 'course code',
+                  hintText: 'course code e.g CS101',
                   filled: true,
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.all(18),
@@ -126,7 +131,7 @@ class _NewCourseScreenState extends ConsumerState<NewCourseScreen> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: TextButton(
-                  onPressed: () => addCourse,
+                  onPressed: addCourse,
                   child: isLoading
                       ? const Loader()
                       : const Text(
