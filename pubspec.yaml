@@ -28,6 +28,7 @@ dependencies:
   flutter_spinkit: ^5.1.0
   fluid_bottom_nav_bar: ^1.4.0
   google_fonts: ^4.0.3
+  custom_radio_grouped_button: ^2.1.2+2
 
 dev_dependencies:
   flutter_test:
