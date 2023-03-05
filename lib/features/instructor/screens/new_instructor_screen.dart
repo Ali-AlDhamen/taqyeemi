@@ -8,6 +8,11 @@ class NewInstructorScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('New Instructor'),
+      ),
+      body: Container(),
+    );
   }
 }
