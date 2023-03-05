@@ -1,7 +1,6 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 
-import '../main.dart';
 
 void showSnackBar(BuildContext context, String message) {
   final snackBar = SnackBar(
@@ -17,5 +16,6 @@ void showSnackBar(BuildContext context, String message) {
     ),
   );
 
-  scaffoldMessengerKey.currentState!.showSnackBar(snackBar);
+  // hide then show
+  ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(snackBar);
 }

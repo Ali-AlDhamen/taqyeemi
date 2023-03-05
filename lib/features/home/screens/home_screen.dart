@@ -3,8 +3,8 @@ import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 
 import '../../../theme/pallete.dart';
 import '../drawers/navigation_drawer.dart';
-import 'courses_screen.dart';
-import 'instructors_screen.dart';
+import '../../course/screens/courses_screen.dart';
+import '../../instructor/screens/instructors_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "/home";
