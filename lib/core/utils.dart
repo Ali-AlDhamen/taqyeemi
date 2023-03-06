@@ -65,7 +65,14 @@ Text courseDiffuclty(double num) {
       'Hard',
       style: TextStyle(color: Colors.orange, fontSize: 10),
     );
-  } else {
+  }
+  else if (num <= 1){
+    return const Text(
+      'Unknown',
+      style: TextStyle(color: Colors.grey, fontSize: 10),
+    );
+  }
+   else {
     return const Text(
       'Very Hard',
       style: TextStyle(color: Colors.red, fontSize: 10),
