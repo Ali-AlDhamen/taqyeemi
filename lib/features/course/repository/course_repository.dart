@@ -63,15 +63,6 @@ class CourseRepository {
     }
   }
 
-  Stream<List<CourseComment>> getComments(String courseName) {
-    return _courses.doc(courseName).snapshots().map((snapshot) {
-      return (snapshot.data() as Map<String, dynamic>)['comments']
-          .map<CourseComment>((comment) {
-        return CourseComment.fromMap(comment as Map<String, dynamic>);
-      }).toList();
-    });
-  }
-
   Stream<List<Course>> searchCourses(String query) {
     return _courses
         .where(

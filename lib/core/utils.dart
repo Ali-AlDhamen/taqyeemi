@@ -1,6 +1,8 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
+import 'package:taqyeemi/models/course_comment_model.dart';
 
+import '../features/course/screens/widgets/grade_container.dart';
 import '../models/course_diffuclty_model.dart';
 import '../models/course_model.dart';
 
@@ -192,4 +194,68 @@ List<CourseDiffuclty> diffucltyOverTotal(Course course) {
     }
     // return as A+
     return courseDiffucltyLetter(sum / course.comments.length);
+  }
+
+
+
+  GradeContainer getGradeColor(CourseComment comment) {
+    if (comment.grade == "A+" || comment.grade == "A") {
+      return GradeContainer(text: comment.grade, color: Colors.green);
+    } else if (comment.grade == "B+" || comment.grade == "B") {
+      return GradeContainer(text: comment.grade, color: Colors.yellow);
+    } else if (comment.grade == "C+" || comment.grade == "C") {
+      return GradeContainer(text: comment.grade, color: Colors.orange);
+    } else if (comment.grade == "D+" || comment.grade == "D") {
+      return GradeContainer(text: comment.grade, color: Colors.red);
+    } else if (comment.grade == "F") {
+      return GradeContainer(text: comment.grade, color: Colors.red);
+    }
+    return GradeContainer(text: comment.grade, color: Colors.red);
+  }
+
+  GradeContainer getDiffucltyColor (CourseComment comment) {
+    if (comment.difficulty == "Super Easy") {
+      return GradeContainer(text: comment.difficulty, color: Colors.green);
+    } else if (comment.difficulty == "Easy") {
+      return GradeContainer(text: comment.difficulty, color: Colors.green);
+    } else if (comment.difficulty == "Medium") {
+      return GradeContainer(text: comment.difficulty, color: Colors.yellow);
+    } else if (comment.difficulty == "Hard") {
+      return GradeContainer(text: comment.difficulty, color: Colors.orange);
+    } else if (comment.difficulty == "Super Hard") {
+      return GradeContainer(text: comment.difficulty, color: Colors.red);
+    }
+    return GradeContainer(text: comment.difficulty, color: Colors.red);
+  }
+
+  String sinceWhen(DateTime date) {
+    DateTime now = DateTime.now();
+    Duration difference = now.difference(date);
+    if (difference.inDays > 0) {
+      // more than 24 hours ago
+      return '${difference.inDays} ${difference.inDays == 1 ? "day" : "days"} ago';
+    } else if (difference.inHours > 0) {
+      // more than an hour ago
+      return '${difference.inHours} ${difference.inHours == 1 ? "hour" : "hours"} ago';
+    } else if (difference.inMinutes > 0) {
+      // more than a minute ago
+      return '${difference.inMinutes} ${difference.inMinutes == 1 ? "minute" : "minutes"} ago';
+    } else {
+      // less than a minute ago
+      return 'just now';
+    }
+  }
+
+
+ValueNotifier<double> valueNotifier(Course course){
+    if(course.comments.isEmpty){
+      return ValueNotifier(0);
+    }
+    double sum = 0;
+    for (var element in course.comments) {
+      sum += calculateGrade(element.grade);
+      
+    }
+    return ValueNotifier(sum/course.comments.length);
+
   }

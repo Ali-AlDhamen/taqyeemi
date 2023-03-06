@@ -35,6 +35,15 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     }
   }
   
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _mobileNumberController.dispose();
+    _fullNameController.dispose();
+  }
+  
 
   @override
   Widget build(BuildContext context) {

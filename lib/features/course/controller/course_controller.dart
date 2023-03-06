@@ -23,10 +23,6 @@ final coursesProvider = StreamProvider((ref) {
   return ref.watch(courseControllerProvider.notifier).getCourses();
 });
 
-final commentsProvider = StreamProvider.family((ref, String courseName) {
-  return ref.watch(courseControllerProvider.notifier).getComments(courseName);
-});
-
 final searchCoursesProvider = StreamProvider.family((ref, String query) {
   return ref.watch(courseControllerProvider.notifier).searchCourses(query);
 });
@@ -68,8 +64,8 @@ class CourseController extends StateNotifier<bool> {
     return _courseRepository.getCourseByName(name);
   }
 
-  void addComment(
-      String grade, String comment, String diffuclty, Course course , BuildContext context) async {
+  void addComment(String grade, String comment, String diffuclty, Course course,
+      BuildContext context) async {
     state = true;
     final user = _ref.read(userProvider)!;
 
@@ -89,10 +85,6 @@ class CourseController extends StateNotifier<bool> {
     result.fold((l) => showSnackBar(context, l.message), (r) {
       Navigator.pop(context);
     });
-  }
-
-  Stream<List<CourseComment>> getComments(String courseName) {
-    return _courseRepository.getComments(courseName);
   }
 
   Stream<List<Course>> searchCourses(String query) {

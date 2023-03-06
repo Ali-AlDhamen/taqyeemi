@@ -12,27 +12,14 @@ class CourseInformation extends StatelessWidget {
 
   const CourseInformation({Key? key, required this.course}) : super(key: key);
 
-
-  ValueNotifier<double> valueNotifier(){
-    if(course.comments.isEmpty){
-      return ValueNotifier(0);
-    }
-    double sum = 0;
-    for (var element in course.comments) {
-      sum += calculateGrade(element.grade);
-      
-    }
-    return ValueNotifier(sum/course.comments.length);
-
-  }
-
   void navigateToCourseScreen(BuildContext context) {
-   Navigator.pushNamed(context, CourseScreen.routeName, arguments: course.name);
-  } 
+    Navigator.pushNamed(context, CourseScreen.routeName,
+        arguments: course.name);
+  }
 
   @override
   Widget build(BuildContext context) {
-    ValueNotifier<double> value = valueNotifier();
+    ValueNotifier<double> value = valueNotifier(course);
     return GestureDetector(
       onTap: () => navigateToCourseScreen(context),
       child: Container(
@@ -50,7 +37,7 @@ class CourseInformation extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                   Text(course.code,
+                  Text(course.code,
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold)),
                   const SizedBox(),
@@ -65,7 +52,7 @@ class CourseInformation extends StatelessWidget {
                       animationDuration: 3,
                       progressStrokeWidth: 5,
                       backStrokeWidth: 5,
-                      onGetText: (p0) {                 
+                      onGetText: (p0) {
                         return courseDiffuclty(p0);
                       },
                     ),
