@@ -349,7 +349,8 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
                 ),
                 Expanded(
                   child: ListView.builder(
-                    reverse: true,
+                    shrinkWrap: true,
+                    reverse: false,
                     itemCount: course.comments.length,
                     itemBuilder: (context, index) {
                       return CommentCard(

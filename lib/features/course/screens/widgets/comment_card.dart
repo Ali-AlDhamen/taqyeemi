@@ -68,7 +68,6 @@ class CommentCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 10),
         padding: const EdgeInsets.all(10),
         width: width * 0.9,
-        
         decoration: BoxDecoration(
           color: Pallete.grayColor,
           borderRadius: BorderRadius.circular(10),
@@ -90,13 +89,15 @@ class CommentCard extends StatelessWidget {
                 Text(sinceWhen(comment.date)),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Align(
               alignment: Alignment.centerLeft,
               child: AutoSizeText(
-                comment.comment ?? "No Comment",
+                comment.comment == "" || comment.comment == null
+                    ? "No Comment"
+                    : comment.comment!,
                 style: const TextStyle(fontSize: 18),
                 minFontSize: 12,
                 maxLines: 10,
