@@ -1,8 +1,8 @@
+import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
-import 'package:step_progress_indicator/step_progress_indicator.dart';
+
 import 'package:taqyeemi/core/common/error_text.dart';
 import 'package:taqyeemi/core/common/loader.dart';
 import 'package:taqyeemi/features/course/controller/course_controller.dart';
@@ -13,10 +13,26 @@ import 'package:taqyeemi/theme/pallete.dart';
 import '../../../core/utils.dart';
 import '../../../models/course_model.dart';
 
-class CourseScreen extends ConsumerWidget {
+class CourseScreen extends ConsumerStatefulWidget {
   static const String routeName = '/course';
   final String name;
   const CourseScreen(this.name, {super.key});
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _CourseScreenState();
+}
+
+class _CourseScreenState extends ConsumerState<CourseScreen> {
+  final TextEditingController _diffucltyController = TextEditingController();
+  final TextEditingController _gradeController = TextEditingController();
+  final TextEditingController _commentController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _gradeController.dispose();
+    _commentController.dispose();
+    _diffucltyController.dispose();
+  }
 
   ValueNotifier<double> valueNotifier(Course course) {
     if (course.comments.isEmpty) {
@@ -38,7 +54,7 @@ class CourseScreen extends ConsumerWidget {
       sum += calculateGrade(element.grade);
     }
     // return as A+
-    return courseDiffuclty(sum / course.comments.length);
+    return courseDiffucltyLetter(sum / course.comments.length);
   }
 
   List<CourseDiffuclty> diffucltyOverTotal(Course course) {
@@ -97,17 +113,170 @@ class CourseScreen extends ConsumerWidget {
     ];
   }
 
+  void _showInputForm(BuildContext context, Course course) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Align(
+                alignment: Alignment.topLeft,
+                child: Text('Course Rate'),
+              ),
+              const SizedBox(height: 10),
+              CustomRadioButton(
+                autoWidth: true,
+                elevation: 0,
+                absoluteZeroSpacing: true,
+                unSelectedColor: Colors.transparent,
+                buttonLables: const [
+                  "Super Easy",
+                  "Easy",
+                  "Medium",
+                  "Hard",
+                  "Super Hard"
+                ],
+                buttonValues: const [
+                  "Super Easy",
+                  "Easy",
+                  "Medium",
+                  "Hard",
+                  "Super Hard"
+                ],
+                buttonTextStyle: const ButtonTextStyle(
+                    selectedColor: Colors.white,
+                    unSelectedColor: Colors.white,
+                    textStyle: TextStyle(fontSize: 12)),
+                radioButtonValue: (value) {
+                  _diffucltyController.text = value;
+                },
+                selectedColor: Pallete.purpleColor,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Align(
+                alignment: Alignment.topLeft,
+                child: Text('Course Grade'),
+              ),
+              const SizedBox(height: 10),
+              CustomRadioButton(
+                autoWidth: true,
+                elevation: 0,
+                absoluteZeroSpacing: true,
+                unSelectedColor: Colors.transparent,
+                buttonLables: const [
+                  "F",
+                  "D",
+                  "D+",
+                  "C",
+                  "C+",
+                  "B",
+                  "B+",
+                  "A",
+                  "A+",
+                ],
+                buttonValues: const [
+                  "F",
+                  "D",
+                  "D+",
+                  "C",
+                  "C+",
+                  "B",
+                  "B+",
+                  "A",
+                  "A+",
+                ],
+                buttonTextStyle: const ButtonTextStyle(
+                    selectedColor: Colors.white,
+                    unSelectedColor: Colors.white,
+                    textStyle: TextStyle(fontSize: 12)),
+                radioButtonValue: (value) {
+                  _gradeController.text = value;
+                },
+                selectedColor: Pallete.purpleColor,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Align(
+                alignment: Alignment.topLeft,
+                child: Text('Comment'),
+              ),
+              // comment text
+              // create comment text area
+              const SizedBox(height: 10),
+
+              TextField(
+                onChanged: (value) {
+                  _commentController.text = value;
+                  print(_commentController.text);
+                },
+                cursorColor: Pallete.purpleColor,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Pallete.purpleColor, width: 1.0),
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Pallete.purpleColor, width: 1.0),
+                    ),
+                    hintText: "Enter your comment here (its optional)"),
+                maxLines: 7,
+                maxLength: 400,
+              ),
+
+              Container(
+                width: 100,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Pallete.purpleColor,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    addComment(course);
+                  },
+                  child: const Text(
+                    "Submit",
+                    style: TextStyle(
+                      color: Pallete.whiteColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void addComment(Course course) {
+    ref.read(courseControllerProvider.notifier).addComment(
+        _gradeController.text.trim(),
+        _commentController.text.trim(),
+        _diffucltyController.text.trim(),
+        course,
+        context);
+  }
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(name),
+        title: Text(widget.name),
       ),
-      body: ref.watch(courseByNameProvider(name)).when(
+      body: ref.watch(courseByNameProvider(widget.name)).when(
           data: (course) {
-            print(course);
             ValueNotifier<double> value = valueNotifier(course);
             return Container(
               margin: const EdgeInsets.all(10),
@@ -147,8 +316,31 @@ class CourseScreen extends ConsumerWidget {
                     ),
                     title: Text("${course.creditHours} credit hours"),
                   ),
-                  ...diffucltyOverTotal(course).map((e) => DifficultyBar(e)).toList(),
-               
+                  ...diffucltyOverTotal(course)
+                      .map((e) => DifficultyBar(e))
+                      .toList(),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    width: 200,
+                    height: MediaQuery.of(context).size.height * 0.06,
+                    decoration: BoxDecoration(
+                      color: Pallete.purpleColor,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: TextButton(
+                      onPressed: () => _showInputForm(context, course),
+                      child: const Text(
+                        "Add Rating",
+                        style: TextStyle(
+                          color: Pallete.whiteColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             );

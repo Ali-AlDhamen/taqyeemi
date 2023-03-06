@@ -31,7 +31,11 @@ class _NewCourseScreenState extends ConsumerState<NewCourseScreen> {
     final courseName = _courseNameController.text;
     final courseCode = _courseCodeController.text;
     final courseCreditHours = _courseCreditHoursController.text;
-    ref.read(courseControllerProvider.notifier).addCourse(courseName: courseName, courseCode: courseCode, courseCreditHours: int.parse(courseCreditHours), context: context);
+    ref.read(courseControllerProvider.notifier).addCourse(
+        courseName: courseName,
+        courseCode: courseCode,
+        courseCreditHours: int.parse(courseCreditHours),
+        context: context);
   }
 
   @override
@@ -84,6 +88,11 @@ class _NewCourseScreenState extends ConsumerState<NewCourseScreen> {
               const SizedBox(
                 height: 20,
               ),
+              const Align(
+                alignment: Alignment.topLeft,
+                child: Text('Course Credit Hours'),
+              ),
+              const SizedBox(height: 10),
               CustomRadioButton(
                 elevation: 0,
                 absoluteZeroSpacing: true,
@@ -118,7 +127,6 @@ class _NewCourseScreenState extends ConsumerState<NewCourseScreen> {
                     textStyle: TextStyle(fontSize: 16)),
                 radioButtonValue: (value) {
                   _courseCreditHoursController.text = value;
-
                 },
                 selectedColor: Pallete.purpleColor,
               ),

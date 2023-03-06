@@ -32,7 +32,7 @@ class CourseInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ValueNotifier<double> value = ValueNotifier(90);
+    ValueNotifier<double> value = valueNotifier();
     return GestureDetector(
       onTap: () => navigateToCourseScreen(context),
       child: Container(

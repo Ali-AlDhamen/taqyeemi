@@ -9,7 +9,6 @@ import '../../../core/constants/firebase_constants.dart';
 import '../../../core/providers/firebase_providers.dart';
 import '../../../models/user_model.dart';
 
-
 final authRepositoryProvider = Provider(
   (ref) => AuthRepository(
     firestore: ref.read(firestoreProvider),
@@ -47,9 +46,8 @@ class AuthRepository {
       await _users.doc(userId).set(userModel.toMap());
 
       return Right(userModel);
-    // ignore: unused_catch_clause
-    } on FirebaseAuthException catch (e) {
-      rethrow;
+    } on FirebaseException catch (e) {
+      return Left(Failure(e.toString()));
     } catch (e) {
       return Left(Failure(e.toString()));
     }
@@ -62,13 +60,11 @@ class AuthRepository {
           email: email, password: password);
       final userId = authResult.user!.uid;
 
-
       UserModel userModel = await getUserData(userId).first;
 
       return Right(userModel);
-    // ignore: unused_catch_clause
     } on FirebaseAuthException catch (e) {
-      rethrow;
+      return Left(Failure(e.toString()));
     } catch (e) {
       return Left(Failure(e.toString()));
     }
@@ -76,7 +72,7 @@ class AuthRepository {
 
   Stream<UserModel> getUserData(String uid) {
     return _users.doc(uid).snapshots().map((event) {
-      return UserModel.fromMap(event.data() as Map<String , dynamic>);
+      return UserModel.fromMap(event.data() as Map<String, dynamic>);
     });
   }
 

@@ -6,6 +6,7 @@ import '../../../core/constants/firebase_constants.dart';
 import '../../../core/failure.dart';
 import '../../../core/providers/firebase_providers.dart';
 import '../../../core/type_defs.dart';
+import '../../../models/course_comment_model.dart';
 import '../../../models/course_model.dart';
 
 final courseRepositoryProvider = Provider((ref) {
@@ -33,7 +34,7 @@ class CourseRepository {
 
       return right(_courses.doc(course.name).set(course.toMap()));
     } on FirebaseException catch (e) {
-      throw e.message!;
+      return Left(Failure(e.toString()));
     } catch (e) {
       return left(Failure(e.toString()));
     }
@@ -51,6 +52,25 @@ class CourseRepository {
     return _courses.doc(name).snapshots().map((snapshot) {
       return Course.fromMap(snapshot.data() as Map<String, dynamic>);
     });
+  }
+
+  FutureVoid addComment(CourseComment comment, String courseName) async {
+    try {
+
+      return right(_courses.doc(courseName).update({
+        'comments': FieldValue.arrayUnion([comment.toMap()])
+      }));
+
+
+    } on FirebaseException catch (e){
+      return Left(Failure(e.toString()));
+    }
+    catch (e){
+      return left(Failure(e.toString()));
+    }
+
+
+
   }
 
 }

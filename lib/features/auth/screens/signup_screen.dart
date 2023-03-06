@@ -34,6 +34,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
           context: context);
     }
   }
+  
 
   @override
   Widget build(BuildContext context) {

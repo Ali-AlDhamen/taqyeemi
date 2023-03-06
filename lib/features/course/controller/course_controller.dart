@@ -3,19 +3,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taqyeemi/features/course/repository/course_repository.dart';
 
 import '../../../core/utils.dart';
+import '../../../models/course_comment_model.dart';
 import '../../../models/course_model.dart';
+import '../../auth/controller/auth_controller.dart';
 
-
-final courseControllerProvider = StateNotifierProvider<CourseController , bool>((ref) {
+final courseControllerProvider =
+    StateNotifierProvider<CourseController, bool>((ref) {
   return CourseController(
     courseRepository: ref.watch(courseRepositoryProvider),
     ref: ref,
   );
 });
 
-
-
-final courseByNameProvider = StreamProvider.family((ref,String name) {
+final courseByNameProvider = StreamProvider.family((ref, String name) {
   return ref.watch(courseControllerProvider.notifier).getCourseByName(name);
 });
 
@@ -32,7 +32,10 @@ class CourseController extends StateNotifier<bool> {
         _ref = ref,
         super(false);
 
-  void addCourse({ required String courseName, required String courseCode, required int courseCreditHours,
+  void addCourse(
+      {required String courseName,
+      required String courseCode,
+      required int courseCreditHours,
       required BuildContext context}) async {
     state = true;
     Course course = Course(
@@ -49,7 +52,6 @@ class CourseController extends StateNotifier<bool> {
     });
   }
 
-
   Stream<List<Course>> getCourses() {
     return _courseRepository.getCourses();
   }
@@ -58,5 +60,26 @@ class CourseController extends StateNotifier<bool> {
     return _courseRepository.getCourseByName(name);
   }
 
+  void addComment(
+      String grade, String comment, String diffuclty, Course course , BuildContext context) async {
+    state = true;
+    final user = _ref.read(userProvider)!;
 
+    CourseComment courseComment = CourseComment(
+        id: "${course.name}${DateTime.now()}",
+        comment: comment,
+        difficulty: diffuclty,
+        grade: grade,
+        userId: user.userId,
+        courseId: course.id,
+        date: DateTime.now());
+
+    final result =
+        await _courseRepository.addComment(courseComment, course.name);
+    state = false;
+
+    result.fold((l) => showSnackBar(context, l.message), (r) {
+      Navigator.pop(context);
+    });
+  }
 }

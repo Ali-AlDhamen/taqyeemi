@@ -1,6 +1,9 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+
+import '../theme/pallete.dart';
 
 void showSnackBar(BuildContext context, String message) {
   final snackBar = SnackBar(
@@ -72,9 +75,37 @@ Text courseDiffuclty(double num) {
     );
   }
 }
-
+Text courseDiffucltyLetter(double num) {
+  if (num >= 90) {
+    return const Text(
+      'Average Grade (A)',
+      style: TextStyle(color: Colors.green, fontSize: 10),
+    );
+  } else if (num >= 80) {
+    return const Text(
+      'Average Grade (B)',
+      style: TextStyle(color: Colors.green, fontSize: 10),
+    );
+  } else if (num >= 70) {
+    return const Text(
+      'Average Grade (C)',
+      style: TextStyle(color: Colors.yellow, fontSize: 10),
+    );
+  } else if (num >= 60) {
+    return const Text(
+      'Average Grade (D)',
+      style: TextStyle(color: Colors.orange, fontSize: 10),
+    );
+  } else {
+    return const Text(
+      'Average Grade (F)',
+      style: TextStyle(color: Colors.red, fontSize: 10),
+    );
+  }
+}
 
 MaterialColor gradeColor(double num) {
+  print(num);
   if (num >= 90) {
     return Colors.green;
   } else if (num >= 80) {

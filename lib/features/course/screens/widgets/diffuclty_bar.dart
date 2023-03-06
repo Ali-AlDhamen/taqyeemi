@@ -9,6 +9,7 @@ class DifficultyBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(diffuclty);
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
@@ -21,9 +22,9 @@ class DifficultyBar extends StatelessWidget {
             child: StepProgressIndicator(
               padding: 0,
               totalSteps: 100,
-              currentStep: (diffuclty.precentage ).toInt(),
+              currentStep: (diffuclty.precentage * 100 ).toInt(),
               size: 15,
-              selectedColor: Colors.green,
+              selectedColor: diffuclty.color,
               unselectedColor: Colors.grey,
               roundedEdges:  const Radius.circular(10),
             ),
