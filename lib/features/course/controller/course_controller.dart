@@ -14,10 +14,10 @@ final courseControllerProvider = StateNotifierProvider<CourseController , bool>(
 });
 
 
+
 final courseByNameProvider = StreamProvider.family((ref,String name) {
   return ref.watch(courseControllerProvider.notifier).getCourseByName(name);
 });
-
 
 final coursesProvider = StreamProvider((ref) {
   return ref.watch(courseControllerProvider.notifier).getCourses();

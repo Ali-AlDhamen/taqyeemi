@@ -29,6 +29,10 @@ dependencies:
   fluid_bottom_nav_bar: ^1.4.0
   google_fonts: ^4.0.3
   custom_radio_grouped_button: ^2.1.2+2
+  step_progress_indicator: ^1.0.2
+  circular_progress_bar: ^0.0.4
+  simple_circular_progress_bar: ^1.0.2
+  font_awesome_flutter: ^10.4.0
 
 dev_dependencies:
   flutter_test:

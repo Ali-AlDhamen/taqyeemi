@@ -51,7 +51,7 @@ class Course {
       code: map['code'] as String,
       name: map['name'] as String,
       creditHours: map['creditHours'] as int,
-      comments: List<CourseComment>.from((map['comments'] as List<int>).map<CourseComment>((x) => CourseComment.fromMap(x as Map<String,dynamic>),),),
+      comments: List<CourseComment>.from((map['comments'] as List<dynamic>).map<CourseComment>((x) => CourseComment.fromMap(x as Map<String,dynamic>),),),
     );
   }
 

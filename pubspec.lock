@@ -65,6 +65,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1+1"
+  circular_progress_bar:
+    dependency: "direct main"
+    description:
+      name: circular_progress_bar
+      sha256: b3b9060743383da09309a73ef862aaa2c1c80d61d2f0eb0ba3332f45ee0bd994
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   clock:
     dependency: transitive
     description:
@@ -288,6 +296,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
+  font_awesome_flutter:
+    dependency: "direct main"
+    description:
+      name: font_awesome_flutter
+      sha256: "959ef4add147753f990b4a7c6cccb746d5792dbdc81b1cde99e62e7edb31b206"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.4.0"
   fpdart:
     dependency: "direct main"
     description:
@@ -520,6 +536,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  simple_circular_progress_bar:
+    dependency: "direct main"
+    description:
+      name: simple_circular_progress_bar
+      sha256: e661ca942fbc617298e975b41fde19003d995de73ca6c2a1526c54d52f07151b
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -549,6 +573,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.2+1"
+  step_progress_indicator:
+    dependency: "direct main"
+    description:
+      name: step_progress_indicator
+      sha256: b51bb1fcfc78454359f0658c5a2c21548c3825ebf76e826308e9ca10f383bbb8
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   stream_channel:
     dependency: transitive
     description:
