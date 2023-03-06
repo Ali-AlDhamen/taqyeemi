@@ -214,7 +214,6 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
               TextField(
                 onChanged: (value) {
                   _commentController.text = value;
-                  print(_commentController.text);
                 },
                 cursorColor: Pallete.purpleColor,
                 decoration: const InputDecoration(
@@ -278,7 +277,6 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
       ),
       body: ref.watch(courseByNameProvider(widget.name)).when(
           data: (course) {
-            ValueNotifier<double> value = valueNotifier(course);
             return Column(
               children: [
                 Container(
@@ -308,13 +306,13 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
                       ),
                       const SizedBox(height: 10),
                       ListTile(
-                        leading: FaIcon(
+                        leading: const FaIcon(
                           FontAwesomeIcons.book,
                         ),
                         title: Text(course.name),
                       ),
                       ListTile(
-                        leading: FaIcon(
+                        leading: const FaIcon(
                           FontAwesomeIcons.clock,
                         ),
                         title: Text("${course.creditHours} credit hours"),
@@ -362,7 +360,7 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
               ],
             );
           },
-          error: (error, StackTrace) => ErrorText(error: error.toString()),
+          error: (error, stackTrace) => ErrorText(error: error.toString()),
           loading: () => const Loader()),
     );
   }

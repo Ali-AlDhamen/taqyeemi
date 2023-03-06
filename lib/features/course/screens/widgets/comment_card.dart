@@ -1,15 +1,19 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
 import 'package:taqyeemi/features/course/screens/widgets/grade_container.dart';
 import 'package:taqyeemi/models/course_comment_model.dart';
 import 'package:taqyeemi/theme/pallete.dart';
 
-class CommentCard extends StatelessWidget {
-  CourseComment comment;
 
-  CommentCard({super.key, required this.comment});
+class CommentCard extends StatelessWidget {
+  final CourseComment comment;
+
+  const CommentCard({
+    Key? key,
+    required this.comment,
+  }) : super(key: key);
 
   GradeContainer getGradeColor() {
     if (comment.grade == "A+" || comment.grade == "A") {
@@ -61,9 +65,7 @@ class CommentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // get width and height
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
     return Container(
         margin: const EdgeInsets.symmetric(vertical: 10),
         padding: const EdgeInsets.all(10),

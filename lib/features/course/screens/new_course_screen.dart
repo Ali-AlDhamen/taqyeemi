@@ -17,7 +17,7 @@ class NewCourseScreen extends ConsumerStatefulWidget {
 class _NewCourseScreenState extends ConsumerState<NewCourseScreen> {
   final TextEditingController _courseNameController = TextEditingController();
   final TextEditingController _courseCodeController = TextEditingController();
-  TextEditingController _courseCreditHoursController = TextEditingController();
+  final TextEditingController _courseCreditHoursController = TextEditingController();
 
   @override
   void dispose() {

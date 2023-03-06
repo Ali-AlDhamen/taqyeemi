@@ -4,12 +4,11 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 import '../../../../models/course_diffuclty_model.dart';
 
 class DifficultyBar extends StatelessWidget {
-  CourseDiffuclty diffuclty;
-  DifficultyBar(this.diffuclty, {super.key});
+  final CourseDiffuclty diffuclty;
+  const DifficultyBar(this.diffuclty, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    print(diffuclty);
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: Row(

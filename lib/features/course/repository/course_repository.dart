@@ -22,9 +22,7 @@ class CourseRepository {
   CollectionReference get _courses =>
       _firestore.collection(FirebaseConstants.coursesCollection);
 
-  CollectionReference get _comments =>
-      _firestore.collection(FirebaseConstants.coursesCommentsCollection);
-
+  
   FutureVoid addCourse(Course course) async {
     try {
       var courseDoc = await _courses.doc(course.name).get();

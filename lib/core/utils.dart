@@ -1,9 +1,6 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 
-import '../theme/pallete.dart';
 
 void showSnackBar(BuildContext context, String message) {
   final snackBar = SnackBar(

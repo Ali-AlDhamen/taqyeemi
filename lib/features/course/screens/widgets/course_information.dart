@@ -73,13 +73,13 @@ class CourseInformation extends StatelessWidget {
                 ],
               ),
               ListTile(
-                leading: FaIcon(
+                leading: const FaIcon(
                   FontAwesomeIcons.book,
                 ),
                 title: Text(course.name),
               ),
               ListTile(
-                leading: FaIcon(
+                leading: const FaIcon(
                   FontAwesomeIcons.clock,
                 ),
                 title: Text("${course.creditHours} credit hours"),

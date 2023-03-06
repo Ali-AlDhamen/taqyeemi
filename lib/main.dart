@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:taqyeemi/core/common/loader.dart';
-import 'package:taqyeemi/features/course/screens/courses_screen.dart';
 import 'package:taqyeemi/features/course/screens/new_course_screen.dart';
 import 'core/common/error_text.dart';
 import 'features/auth/controller/auth_controller.dart';
