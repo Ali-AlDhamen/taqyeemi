@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:taqyeemi/core/common/error_text.dart';
 import 'package:taqyeemi/core/common/loader.dart';
 import 'package:taqyeemi/features/course/controller/course_controller.dart';
+import 'package:taqyeemi/features/course/screens/widgets/comment_card.dart';
 import 'package:taqyeemi/features/course/screens/widgets/diffuclty_bar.dart';
 import 'package:taqyeemi/models/course_diffuclty_model.dart';
 import 'package:taqyeemi/theme/pallete.dart';
@@ -278,71 +279,86 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
       body: ref.watch(courseByNameProvider(widget.name)).when(
           data: (course) {
             ValueNotifier<double> value = valueNotifier(course);
-            return Container(
-              margin: const EdgeInsets.all(10),
-              height: height * 0.5,
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Pallete.grayColor,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            return Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  height: height * 0.5,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Pallete.grayColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
                     children: [
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Pallete.greyColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(course.code,
-                            style: const TextStyle(color: Colors.black)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Pallete.greyColor,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Text(course.code,
+                                style: const TextStyle(color: Colors.black)),
+                          ),
+                          averageGrade(course),
+                        ],
                       ),
-                      averageGrade(course),
+                      const SizedBox(height: 10),
+                      ListTile(
+                        leading: FaIcon(
+                          FontAwesomeIcons.book,
+                        ),
+                        title: Text(course.name),
+                      ),
+                      ListTile(
+                        leading: FaIcon(
+                          FontAwesomeIcons.clock,
+                        ),
+                        title: Text("${course.creditHours} credit hours"),
+                      ),
+                      ...diffucltyOverTotal(course)
+                          .map((e) => DifficultyBar(e))
+                          .toList(),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        width: 200,
+                        height: MediaQuery.of(context).size.height * 0.06,
+                        decoration: BoxDecoration(
+                          color: Pallete.purpleColor,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: TextButton(
+                          onPressed: () => _showInputForm(context, course),
+                          child: const Text(
+                            "Add Rating",
+                            style: TextStyle(
+                              color: Pallete.whiteColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                  const SizedBox(height: 10),
-                  ListTile(
-                    leading: FaIcon(
-                      FontAwesomeIcons.book,
-                    ),
-                    title: Text(course.name),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    reverse: true,
+                    itemCount: course.comments.length,
+                    itemBuilder: (context, index) {
+                      return CommentCard(
+                        comment: course.comments[index],
+                      );
+                    },
                   ),
-                  ListTile(
-                    leading: FaIcon(
-                      FontAwesomeIcons.clock,
-                    ),
-                    title: Text("${course.creditHours} credit hours"),
-                  ),
-                  ...diffucltyOverTotal(course)
-                      .map((e) => DifficultyBar(e))
-                      .toList(),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    width: 200,
-                    height: MediaQuery.of(context).size.height * 0.06,
-                    decoration: BoxDecoration(
-                      color: Pallete.purpleColor,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: TextButton(
-                      onPressed: () => _showInputForm(context, course),
-                      child: const Text(
-                        "Add Rating",
-                        style: TextStyle(
-                          color: Pallete.whiteColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             );
           },
           error: (error, StackTrace) => ErrorText(error: error.toString()),

@@ -56,21 +56,22 @@ class CourseRepository {
 
   FutureVoid addComment(CourseComment comment, String courseName) async {
     try {
-
       return right(_courses.doc(courseName).update({
         'comments': FieldValue.arrayUnion([comment.toMap()])
       }));
-
-
-    } on FirebaseException catch (e){
+    } on FirebaseException catch (e) {
       return Left(Failure(e.toString()));
-    }
-    catch (e){
+    } catch (e) {
       return left(Failure(e.toString()));
     }
-
-
-
   }
 
+  Stream<List<CourseComment>> getComments(String courseName) {
+    return _courses.doc(courseName).snapshots().map((snapshot) {
+      return (snapshot.data() as Map<String, dynamic>)['comments']
+          .map<CourseComment>((comment) {
+        return CourseComment.fromMap(comment as Map<String, dynamic>);
+      }).toList();
+    });
+  }
 }

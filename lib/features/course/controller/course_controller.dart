@@ -23,6 +23,10 @@ final coursesProvider = StreamProvider((ref) {
   return ref.watch(courseControllerProvider.notifier).getCourses();
 });
 
+final commentsProvider = StreamProvider.family((ref, String courseName) {
+  return ref.watch(courseControllerProvider.notifier).getComments(courseName);
+});
+
 class CourseController extends StateNotifier<bool> {
   final CourseRepository _courseRepository;
   final Ref _ref;
@@ -81,5 +85,9 @@ class CourseController extends StateNotifier<bool> {
     result.fold((l) => showSnackBar(context, l.message), (r) {
       Navigator.pop(context);
     });
+  }
+
+  Stream<List<CourseComment>> getComments(String courseName) {
+    return _courseRepository.getComments(courseName);
   }
 }

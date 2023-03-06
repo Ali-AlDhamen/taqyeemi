@@ -105,7 +105,6 @@ Text courseDiffucltyLetter(double num) {
 }
 
 MaterialColor gradeColor(double num) {
-  print(num);
   if (num >= 90) {
     return Colors.green;
   } else if (num >= 80) {
