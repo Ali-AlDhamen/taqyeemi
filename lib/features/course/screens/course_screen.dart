@@ -6,6 +6,8 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:taqyeemi/core/common/error_text.dart';
 import 'package:taqyeemi/core/common/loader.dart';
 import 'package:taqyeemi/features/course/controller/course_controller.dart';
+import 'package:taqyeemi/features/course/screens/widgets/diffuclty_bar.dart';
+import 'package:taqyeemi/models/course_diffuclty_model.dart';
 import 'package:taqyeemi/theme/pallete.dart';
 
 import '../../../core/utils.dart';
@@ -37,6 +39,62 @@ class CourseScreen extends ConsumerWidget {
     }
     // return as A+
     return courseDiffuclty(sum / course.comments.length);
+  }
+
+  List<CourseDiffuclty> diffucltyOverTotal(Course course) {
+    if (course.comments.isEmpty) {
+      return [
+        CourseDiffuclty(
+            diffuclty: "Super Easy", precentage: 0, color: Colors.green),
+        CourseDiffuclty(diffuclty: "Easy", precentage: 0, color: Colors.green),
+        CourseDiffuclty(
+            diffuclty: "Medium", precentage: 0, color: Colors.yellow),
+        CourseDiffuclty(diffuclty: "Hard", precentage: 0, color: Colors.red),
+        CourseDiffuclty(
+            diffuclty: "Super Hard", precentage: 0, color: Colors.red),
+      ];
+    }
+    double superEasy = 0;
+    double easy = 0;
+    double medium = 0;
+    double hard = 0;
+    double superHard = 0;
+    for (var element in course.comments) {
+      if (element.difficulty == "Super Easy") {
+        superEasy++;
+      } else if (element.difficulty == "Easy") {
+        easy++;
+      } else if (element.difficulty == "Medium") {
+        medium++;
+      } else if (element.difficulty == "Hard") {
+        hard++;
+      } else if (element.difficulty == "Super Hard") {
+        superHard++;
+      }
+    }
+
+    return [
+      CourseDiffuclty(
+          diffuclty: "Super Easy",
+          precentage: superEasy / course.comments.length,
+          color: Colors.green),
+      CourseDiffuclty(
+          diffuclty: "Easy",
+          precentage: easy / course.comments.length,
+          color: Colors.green),
+      CourseDiffuclty(
+          diffuclty: "Medium",
+          precentage: medium / course.comments.length,
+          color: Colors.yellow),
+      CourseDiffuclty(
+          diffuclty: "Hard",
+          precentage: hard / course.comments.length,
+          color: Colors.red),
+      CourseDiffuclty(
+          diffuclty: "Super Hard",
+          precentage: superHard / course.comments.length,
+          color: Colors.red),
+    ];
   }
 
   @override
@@ -89,15 +147,8 @@ class CourseScreen extends ConsumerWidget {
                     ),
                     title: Text("${course.creditHours} credit hours"),
                   ),
-                  StepProgressIndicator(
-                    padding: 0,
-                    totalSteps: 100,
-                    currentStep: 70,
-                    size: 10,
-                    selectedColor: Colors.green,
-                    unselectedColor: Colors.grey,
-                    roundedEdges: Radius.circular(10),
-                  )
+                  ...diffucltyOverTotal(course).map((e) => DifficultyBar(e)).toList(),
+               
                 ],
               ),
             );
