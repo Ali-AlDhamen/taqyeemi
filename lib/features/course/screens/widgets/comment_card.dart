@@ -67,7 +67,7 @@ class CommentCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
+        margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(10),
         width: width * 0.9,
         decoration: BoxDecoration(

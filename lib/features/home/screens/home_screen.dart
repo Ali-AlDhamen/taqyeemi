@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../theme/pallete.dart';
+import '../delegates/search_courses__delegate.dart';
 import '../drawers/navigation_drawer.dart';
 import '../../course/screens/courses_screen.dart';
 import '../../instructor/screens/instructors_screen.dart';
 
-class HomeScreen extends StatefulWidget {
+
+class HomeScreen extends ConsumerStatefulWidget {
   static const String routeName = "/home";
   const HomeScreen({super.key});
-
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomeScreenState();
 }
+class _HomeScreenState extends ConsumerState<HomeScreen> {
 
-class _HomeScreenState extends State<HomeScreen> {
   Widget _child = const CoursesScreen();
 
   final List<Widget> _children = [
@@ -44,6 +46,20 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () => displayDrawer(context),
           );
         }),
+        actions: [
+          IconButton(
+            onPressed: () {
+              // check if _child is CoursesScreen then display search else none
+              if (_child is CoursesScreen) {
+                showSearch(
+                  context: context,
+                  delegate: SearchCoursesDelegate(ref),
+                );
+              }
+            },
+            icon: const Icon(Icons.search),
+          ),
+        ],
       ),
       body: _child,
       bottomNavigationBar: FluidNavBar(

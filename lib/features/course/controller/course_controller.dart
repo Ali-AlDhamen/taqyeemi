@@ -27,6 +27,10 @@ final commentsProvider = StreamProvider.family((ref, String courseName) {
   return ref.watch(courseControllerProvider.notifier).getComments(courseName);
 });
 
+final searchCoursesProvider = StreamProvider.family((ref, String query) {
+  return ref.watch(courseControllerProvider.notifier).searchCourses(query);
+});
+
 class CourseController extends StateNotifier<bool> {
   final CourseRepository _courseRepository;
   final Ref _ref;
@@ -89,5 +93,9 @@ class CourseController extends StateNotifier<bool> {
 
   Stream<List<CourseComment>> getComments(String courseName) {
     return _courseRepository.getComments(courseName);
+  }
+
+  Stream<List<Course>> searchCourses(String query) {
+    return _courseRepository.searchCourses(query);
   }
 }

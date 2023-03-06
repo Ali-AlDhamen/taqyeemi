@@ -22,7 +22,6 @@ class CourseRepository {
   CollectionReference get _courses =>
       _firestore.collection(FirebaseConstants.coursesCollection);
 
-  
   FutureVoid addCourse(Course course) async {
     try {
       var courseDoc = await _courses.doc(course.name).get();
@@ -69,6 +68,26 @@ class CourseRepository {
       return (snapshot.data() as Map<String, dynamic>)['comments']
           .map<CourseComment>((comment) {
         return CourseComment.fromMap(comment as Map<String, dynamic>);
+      }).toList();
+    });
+  }
+
+  Stream<List<Course>> searchCourses(String query) {
+    return _courses
+        .where(
+          'code',
+          isGreaterThanOrEqualTo: query.isEmpty ? 0 : query,
+          isLessThan: query.isEmpty
+              ? null
+              : query.substring(0, query.length - 1) +
+                  String.fromCharCode(
+                    query.codeUnitAt(query.length - 1) + 1,
+                  ),
+        )
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return Course.fromMap(doc.data() as Map<String, dynamic>);
       }).toList();
     });
   }
