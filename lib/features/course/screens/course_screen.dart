@@ -8,7 +8,6 @@ import 'package:taqyeemi/core/common/loader.dart';
 import 'package:taqyeemi/features/course/controller/course_controller.dart';
 import 'package:taqyeemi/features/course/screens/widgets/comment_card.dart';
 import 'package:taqyeemi/features/course/screens/widgets/diffuclty_bar.dart';
-import 'package:taqyeemi/models/course_diffuclty_model.dart';
 import 'package:taqyeemi/theme/pallete.dart';
 
 import '../../../core/utils.dart';
@@ -35,83 +34,111 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
     _diffucltyController.dispose();
   }
 
-  ValueNotifier<double> valueNotifier(Course course) {
-    if (course.comments.isEmpty) {
-      return ValueNotifier(0);
-    }
-    double sum = 0;
-    for (var element in course.comments) {
-      sum += calculateGrade(element.grade);
-    }
-    return ValueNotifier(sum / course.comments.length);
+  void addComment(Course course) {
+    ref.read(courseControllerProvider.notifier).addComment(
+        _gradeController.text.trim(),
+        _commentController.text.trim(),
+        _diffucltyController.text.trim(),
+        course,
+        context);
   }
 
-  Text averageGrade(Course course) {
-    if (course.comments.isEmpty) {
-      return const Text("Average Grade (Unknown)");
-    }
-    double sum = 0;
-    for (var element in course.comments) {
-      sum += calculateGrade(element.grade);
-    }
-    // return as A+
-    return courseDiffucltyLetter(sum / course.comments.length);
-  }
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
 
-  List<CourseDiffuclty> diffucltyOverTotal(Course course) {
-    if (course.comments.isEmpty) {
-      return [
-        CourseDiffuclty(
-            diffuclty: "Super Easy", precentage: 0, color: Colors.green),
-        CourseDiffuclty(diffuclty: "Easy", precentage: 0, color: Colors.green),
-        CourseDiffuclty(
-            diffuclty: "Medium", precentage: 0, color: Colors.yellow),
-        CourseDiffuclty(diffuclty: "Hard", precentage: 0, color: Colors.red),
-        CourseDiffuclty(
-            diffuclty: "Super Hard", precentage: 0, color: Colors.red),
-      ];
-    }
-    double superEasy = 0;
-    double easy = 0;
-    double medium = 0;
-    double hard = 0;
-    double superHard = 0;
-    for (var element in course.comments) {
-      if (element.difficulty == "Super Easy") {
-        superEasy++;
-      } else if (element.difficulty == "Easy") {
-        easy++;
-      } else if (element.difficulty == "Medium") {
-        medium++;
-      } else if (element.difficulty == "Hard") {
-        hard++;
-      } else if (element.difficulty == "Super Hard") {
-        superHard++;
-      }
-    }
-
-    return [
-      CourseDiffuclty(
-          diffuclty: "Super Easy",
-          precentage: superEasy / course.comments.length,
-          color: Colors.green),
-      CourseDiffuclty(
-          diffuclty: "Easy",
-          precentage: easy / course.comments.length,
-          color: Colors.green),
-      CourseDiffuclty(
-          diffuclty: "Medium",
-          precentage: medium / course.comments.length,
-          color: Colors.yellow),
-      CourseDiffuclty(
-          diffuclty: "Hard",
-          precentage: hard / course.comments.length,
-          color: Colors.red),
-      CourseDiffuclty(
-          diffuclty: "Super Hard",
-          precentage: superHard / course.comments.length,
-          color: Colors.red),
-    ];
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.name),
+      ),
+      body: ref.watch(courseByNameProvider(widget.name)).when(
+          data: (course) {
+            return Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  height: height * 0.5,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Pallete.grayColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Pallete.greyColor,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Text(course.code,
+                                style: const TextStyle(color: Colors.black)),
+                          ),
+                          averageGrade(course),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      ListTile(
+                        leading: const FaIcon(
+                          FontAwesomeIcons.book,
+                        ),
+                        title: Text(course.name),
+                      ),
+                      ListTile(
+                        leading: const FaIcon(
+                          FontAwesomeIcons.clock,
+                        ),
+                        title: Text("${course.creditHours} credit hours"),
+                      ),
+                      ...diffucltyOverTotal(course)
+                          .map((e) => DifficultyBar(e))
+                          .toList(),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        width: 200,
+                        height: MediaQuery.of(context).size.height * 0.06,
+                        decoration: BoxDecoration(
+                          color: Pallete.purpleColor,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: TextButton(
+                          onPressed: () => _showInputForm(context, course),
+                          child: const Text(
+                            "Add Rating",
+                            style: TextStyle(
+                              color: Pallete.whiteColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    reverse: false,
+                    itemCount: course.comments.length,
+                    itemBuilder: (context, index) {
+                      return CommentCard(
+                        comment: course.comments[index],
+                      );
+                    },
+                  ),
+                ),
+              ],
+            );
+          },
+          error: (error, stackTrace) => ErrorText(error: error.toString()),
+          loading: () => const Loader()),
+    );
   }
 
   void _showInputForm(BuildContext context, Course course) {
@@ -255,113 +282,6 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
           ),
         );
       },
-    );
-  }
-
-  void addComment(Course course) {
-    ref.read(courseControllerProvider.notifier).addComment(
-        _gradeController.text.trim(),
-        _commentController.text.trim(),
-        _diffucltyController.text.trim(),
-        course,
-        context);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.name),
-      ),
-      body: ref.watch(courseByNameProvider(widget.name)).when(
-          data: (course) {
-            return Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  height: height * 0.5,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Pallete.grayColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Pallete.greyColor,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Text(course.code,
-                                style: const TextStyle(color: Colors.black)),
-                          ),
-                          averageGrade(course),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      ListTile(
-                        leading: const FaIcon(
-                          FontAwesomeIcons.book,
-                        ),
-                        title: Text(course.name),
-                      ),
-                      ListTile(
-                        leading: const FaIcon(
-                          FontAwesomeIcons.clock,
-                        ),
-                        title: Text("${course.creditHours} credit hours"),
-                      ),
-                      ...diffucltyOverTotal(course)
-                          .map((e) => DifficultyBar(e))
-                          .toList(),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Container(
-                        width: 200,
-                        height: MediaQuery.of(context).size.height * 0.06,
-                        decoration: BoxDecoration(
-                          color: Pallete.purpleColor,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: TextButton(
-                          onPressed: () => _showInputForm(context, course),
-                          child: const Text(
-                            "Add Rating",
-                            style: TextStyle(
-                              color: Pallete.whiteColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    reverse: false,
-                    itemCount: course.comments.length,
-                    itemBuilder: (context, index) {
-                      return CommentCard(
-                        comment: course.comments[index],
-                      );
-                    },
-                  ),
-                ),
-              ],
-            );
-          },
-          error: (error, stackTrace) => ErrorText(error: error.toString()),
-          loading: () => const Loader()),
     );
   }
 }

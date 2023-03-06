@@ -1,6 +1,9 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 
+import '../models/course_diffuclty_model.dart';
+import '../models/course_model.dart';
+
 
 void showSnackBar(BuildContext context, String message) {
   final snackBar = SnackBar(
@@ -121,3 +124,72 @@ MaterialColor gradeColor(double num) {
     return Colors.red;
   }
 }
+
+
+List<CourseDiffuclty> diffucltyOverTotal(Course course) {
+    if (course.comments.isEmpty) {
+      return [
+        CourseDiffuclty(
+            diffuclty: "Super Easy", precentage: 0, color: Colors.green),
+        CourseDiffuclty(diffuclty: "Easy", precentage: 0, color: Colors.green),
+        CourseDiffuclty(
+            diffuclty: "Medium", precentage: 0, color: Colors.yellow),
+        CourseDiffuclty(diffuclty: "Hard", precentage: 0, color: Colors.red),
+        CourseDiffuclty(
+            diffuclty: "Super Hard", precentage: 0, color: Colors.red),
+      ];
+    }
+    double superEasy = 0;
+    double easy = 0;
+    double medium = 0;
+    double hard = 0;
+    double superHard = 0;
+    for (var element in course.comments) {
+      if (element.difficulty == "Super Easy") {
+        superEasy++;
+      } else if (element.difficulty == "Easy") {
+        easy++;
+      } else if (element.difficulty == "Medium") {
+        medium++;
+      } else if (element.difficulty == "Hard") {
+        hard++;
+      } else if (element.difficulty == "Super Hard") {
+        superHard++;
+      }
+    }
+
+    return [
+      CourseDiffuclty(
+          diffuclty: "Super Easy",
+          precentage: superEasy / course.comments.length,
+          color: Colors.green),
+      CourseDiffuclty(
+          diffuclty: "Easy",
+          precentage: easy / course.comments.length,
+          color: Colors.green),
+      CourseDiffuclty(
+          diffuclty: "Medium",
+          precentage: medium / course.comments.length,
+          color: Colors.yellow),
+      CourseDiffuclty(
+          diffuclty: "Hard",
+          precentage: hard / course.comments.length,
+          color: Colors.red),
+      CourseDiffuclty(
+          diffuclty: "Super Hard",
+          precentage: superHard / course.comments.length,
+          color: Colors.red),
+    ];
+  }
+
+  Text averageGrade(Course course) {
+    if (course.comments.isEmpty) {
+      return const Text("Average Grade (Unknown)");
+    }
+    double sum = 0;
+    for (var element in course.comments) {
+      sum += calculateGrade(element.grade);
+    }
+    // return as A+
+    return courseDiffucltyLetter(sum / course.comments.length);
+  }

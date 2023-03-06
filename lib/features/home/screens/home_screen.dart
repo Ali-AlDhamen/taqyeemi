@@ -49,7 +49,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              // check if _child is CoursesScreen then display search else none
               if (_child is CoursesScreen) {
                 showSearch(
                   context: context,
