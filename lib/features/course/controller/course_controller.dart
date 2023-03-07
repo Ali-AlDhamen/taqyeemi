@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:taqyeemi/core/providers/firebase_providers.dart';
 import 'package:taqyeemi/features/course/repository/course_repository.dart';
 
 import '../../../core/utils.dart';
@@ -67,6 +70,7 @@ class CourseController extends StateNotifier<bool> {
   void addComment(String grade, String comment, String diffuclty, Course course,
       BuildContext context) async {
     state = true;
+    
     final user = _ref.read(userProvider)!;
 
     CourseComment courseComment = CourseComment(

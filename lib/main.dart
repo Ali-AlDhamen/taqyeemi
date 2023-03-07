@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,6 +15,8 @@ import 'features/instructor/screens/new_instructor_screen.dart';
 import 'firebase_options.dart';
 import 'package:taqyeemi/theme/pallete.dart';
 
+import 'models/user_model.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -22,7 +25,6 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-
 class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
   @override
@@ -30,6 +32,16 @@ class MyApp extends ConsumerStatefulWidget {
 }
 
 class _MyAppState extends ConsumerState<MyApp> {
+  UserModel? userModel;
+
+  void getData(WidgetRef ref, User data) async {
+    userModel = await ref
+        .watch(authControllerProvider.notifier)
+        .getUserData(data.uid)
+        .first;
+    ref.read(userProvider.notifier).update((state) => userModel);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,6 +51,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       home: ref.watch(authStateChangeProvider).when(
             data: (data) {
               if (data != null) {
+                getData(ref, data);
                 return const HomeScreen();
               }
               return const SignInScreen();
@@ -52,10 +65,9 @@ class _MyAppState extends ConsumerState<MyApp> {
         HomeScreen.routeName: (context) => const HomeScreen(),
         NewInstructorScreen.routeName: (context) => const NewInstructorScreen(),
         NewCourseScreen.routeName: (context) => const NewCourseScreen(),
-        CourseScreen.routeName: (context) =>  CourseScreen(ModalRoute.of(context)!.settings.arguments as String),
+        CourseScreen.routeName: (context) =>
+            CourseScreen(ModalRoute.of(context)!.settings.arguments as String),
       },
     );
   }
 }
-
-
