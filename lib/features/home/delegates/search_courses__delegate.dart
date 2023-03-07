@@ -34,7 +34,13 @@ class SearchCoursesDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return ref.watch(searchCoursesProvider(query)).when(
+    return const SizedBox();
+   
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+     return ref.watch(searchCoursesProvider(query)).when(
           data: (data) {
             return ListView.builder(
               itemCount: data.length,
@@ -50,10 +56,5 @@ class SearchCoursesDelegate extends SearchDelegate {
           loading: () => const Loader(),
           error: (error, stack) => const SizedBox(),
         );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    return const SizedBox();
   }
 }

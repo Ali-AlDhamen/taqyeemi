@@ -44,6 +44,7 @@ class CourseController extends StateNotifier<bool> {
       required String courseCode,
       required int courseCreditHours,
       required BuildContext context}) async {
+        
     state = true;
     Course course = Course(
         id: courseCode,
@@ -70,8 +71,9 @@ class CourseController extends StateNotifier<bool> {
   void addComment(String grade, String comment, String diffuclty, Course course,
       BuildContext context) async {
     state = true;
-    
+
     final user = _ref.read(userProvider)!;
+
 
     CourseComment courseComment = CourseComment(
         id: "${course.name}${DateTime.now()}",
