@@ -5,6 +5,7 @@ import 'package:taqyeemi/theme/pallete.dart';
 
 import '../../../../core/utils.dart';
 
+
 class CommentCard extends StatelessWidget {
   final CourseComment comment;
 
@@ -13,6 +14,7 @@ class CommentCard extends StatelessWidget {
     required this.comment,
   }) : super(key: key);
 
+  
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;

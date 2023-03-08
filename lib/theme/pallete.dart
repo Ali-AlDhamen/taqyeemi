@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../core/enums/enums.dart';
+
+// final themeNotifierProvider =
+//     StateNotifierProvider<ThemeNotifier, ThemeData>((ref) {
+//   return ThemeNotifier();
+// });
 
 class Pallete {
   static const Color blueColor = Color(0xFF36a3c8);
@@ -28,7 +36,6 @@ class Pallete {
   static const darkGrayColor = Color(0xFFe8eeee);
   static const componetColor = Color(0xFFdfdfdf);
 
-
   static var lightModeAppTheme = ThemeData.light().copyWith(
     scaffoldBackgroundColor: backgroundColor,
     cardColor: whiteColor,
@@ -43,5 +50,60 @@ class Pallete {
     ),
     primaryColor: blackColor,
     backgroundColor: whiteColor,
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(
+        color: Colors.black,
+      ),
+      bodyMedium: TextStyle(
+        color: Colors.black,
+      ),
+      titleMedium: TextStyle(
+        color: Colors.black,
+      ),
+      titleSmall: TextStyle(
+        color: Colors.black,
+      ),
+    ),
+   
   );
+}
+
+class ThemeNotifier extends StateNotifier<ThemeData> {
+  AppThemeMode _mode;
+  ThemeNotifier({AppThemeMode mode = AppThemeMode.dark})
+      : _mode = mode,
+        super(
+          Pallete.lightModeAppTheme,
+        ) {
+    getTheme();
+  }
+
+  AppThemeMode get mode => _mode;
+
+  void getTheme() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final theme = prefs.getString('theme');
+
+    if (theme == 'light') {
+      _mode = AppThemeMode.light;
+      state = Pallete.lightModeAppTheme;
+    } else {
+      _mode = AppThemeMode.dark;
+      state = Pallete.darkModeAppTheme;
+    }
+  }
+
+  void toggleTheme() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    if (_mode == ThemeMode.dark) {
+      _mode = AppThemeMode.light;
+      state = Pallete.lightModeAppTheme;
+      prefs.setString('theme', 'light');
+    } else {
+      _mode = AppThemeMode.dark;
+      state = Pallete.darkModeAppTheme;
+      prefs.setString('theme', 'dark');
+    }
+  }
 }

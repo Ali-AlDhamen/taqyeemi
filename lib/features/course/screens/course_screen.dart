@@ -8,6 +8,7 @@ import 'package:taqyeemi/core/common/loader.dart';
 import 'package:taqyeemi/features/course/controller/course_controller.dart';
 import 'package:taqyeemi/features/course/screens/widgets/comment_card.dart';
 import 'package:taqyeemi/features/course/screens/widgets/diffuclty_bar.dart';
+import 'package:taqyeemi/models/course_diffuclty_model.dart';
 import 'package:taqyeemi/theme/pallete.dart';
 
 import '../../../core/utils.dart';
@@ -140,8 +141,6 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
           loading: () => const Loader()),
     );
   }
-
-
 
   void _showInputForm(BuildContext context, Course course) {
     showModalBottomSheet(
