@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../core/enums/enums.dart';
 
-// final themeNotifierProvider =
-//     StateNotifierProvider<ThemeNotifier, ThemeData>((ref) {
-//   return ThemeNotifier();
-// });
+final themeNotifierProvider =
+    StateNotifierProvider<ThemeNotifier, ThemeData>((ref) {
+  return ThemeNotifier();
+});
 
 class Pallete {
   static const Color blueColor = Color(0xFF36a3c8);
