@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:firebase_core/firebase_core.dart';
-import 'package:taqyeemi/core/common/loader.dart';
-import 'package:taqyeemi/features/course/screens/new_course_screen.dart';
-import 'core/common/error_text.dart';
+
+
+import 'features/course/screens/new_course_screen.dart';
+import 'features/instructor/screens/instructor_screen.dart';
+import 'core/core.dart';
 import 'features/auth/controller/auth_controller.dart';
 import 'features/course/screens/course_screen.dart';
 import 'features/home/screens/home_screen.dart';
@@ -13,8 +14,7 @@ import 'features/auth/screens/login_screen.dart';
 import 'features/auth/screens/signup_screen.dart';
 import 'features/instructor/screens/new_instructor_screen.dart';
 import 'firebase_options.dart';
-import 'package:taqyeemi/theme/pallete.dart';
-
+import 'theme/pallete.dart';
 import 'models/user_model.dart';
 
 void main() async {
@@ -67,6 +67,7 @@ class _MyAppState extends ConsumerState<MyApp> {
         NewCourseScreen.routeName: (context) => const NewCourseScreen(),
         CourseScreen.routeName: (context) =>
             CourseScreen(ModalRoute.of(context)!.settings.arguments as String),
+        InstructorScreen.routeName: (context) =>  InstructorScreen(name: ModalRoute.of(context)!.settings.arguments as String),
       },
     );
   }
