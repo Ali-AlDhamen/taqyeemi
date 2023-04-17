@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../core/utils.dart';
+import '../../../core/core.dart';
 import '../../../models/instructor_comment_model.dart';
 import '../../../models/instructor_model.dart';
 import '../../auth/controller/auth_controller.dart';
@@ -14,6 +14,21 @@ final instructorControllerProvider =
     instructorRepository: ref.watch(instructorRepositoryProvider),
     ref: ref,
   );
+});
+
+final instructorByNameProvider = StreamProvider.family((ref, String name) {
+  return ref
+      .watch(instructorControllerProvider.notifier)
+      .getInstructorByName(name);
+});
+final instructorsProvider = StreamProvider(
+  (ref) => ref.watch(instructorControllerProvider.notifier).getInstructors(),
+);
+
+final searchInstructorProvider = StreamProvider.family((ref, String query) {
+  return ref
+      .watch(instructorControllerProvider.notifier)
+      .searchInstructors(query);
 });
 
 class InstructorController extends StateNotifier<bool> {
@@ -52,10 +67,12 @@ class InstructorController extends StateNotifier<bool> {
   void addComment({
     required String instructorName,
     required String? comment,
+    required String courseGrade,
     required int teaching,
     required int grading,
     required int treating,
     required int attendance,
+    required String courseCode,
     required BuildContext context,
   }) async {
     state = true;
@@ -64,11 +81,13 @@ class InstructorController extends StateNotifier<bool> {
         id: const Uuid().v4(),
         instructorId: instructorName,
         userId: userId,
+        courseGrade: courseGrade,
         comment: comment,
         teaching: teaching,
         grading: grading,
         treating: treating,
         attendance: attendance,
+        courseCode: courseCode,
         date: DateTime.now());
 
     final result = await _instructorRepository.addComment(instructorComment);

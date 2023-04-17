@@ -4,9 +4,9 @@ import 'package:fpdart/fpdart.dart';
 import 'package:taqyeemi/models/instructor_comment_model.dart';
 
 import '../../../core/constants/firebase_constants.dart';
-import '../../../core/failure.dart';
+import '../../../core/types/failure.dart';
 import '../../../core/providers/firebase_providers.dart';
-import '../../../core/type_defs.dart';
+import '../../../core/types/type_defs.dart';
 import '../../../models/instructor_model.dart';
 
 final instructorRepositoryProvider = Provider((ref) {
