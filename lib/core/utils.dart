@@ -265,3 +265,15 @@ double calculateInstructor(Instructor instructor) {
   }
   return sum / (instructor.comments.length * 4);
 }
+
+MaterialColor instructorPrecentage(double num) {
+  if (num >= 80) {
+    return Colors.green;
+  } else if (num >= 70) {
+    return Colors.yellow;
+  } else if (num >= 60) {
+    return Colors.orange;
+  } else {
+    return Colors.red;
+  }
+}
