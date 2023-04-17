@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taqyeemi/features/course/controller/course_controller.dart';
 
-import '../../../core/common/loader.dart';
+import '../../../core/core.dart';
 import '../../../theme/pallete.dart';
 
 class NewCourseScreen extends ConsumerStatefulWidget {

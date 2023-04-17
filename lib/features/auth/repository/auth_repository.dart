@@ -2,11 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:taqyeemi/core/failure.dart';
-import 'package:taqyeemi/core/type_defs.dart';
 
-import '../../../core/constants/firebase_constants.dart';
-import '../../../core/providers/firebase_providers.dart';
+import '../../../core/core.dart';
 import '../../../models/user_model.dart';
 
 final authRepositoryProvider = Provider(

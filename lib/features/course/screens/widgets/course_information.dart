@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 import 'package:taqyeemi/features/course/screens/course_screen.dart';
 
-import '../../../../core/utils.dart';
+import '../../../../core/core.dart';
 import '../../../../models/course_model.dart';
 import '../../../../theme/pallete.dart';
 

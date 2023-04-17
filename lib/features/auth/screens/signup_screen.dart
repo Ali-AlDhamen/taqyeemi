@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../theme/pallete.dart';
 import '../controller/auth_controller.dart';
-import '../../../core/common/loader.dart';
+import '../../../core/core.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
   static const String routeName = "/sign_up_screen";

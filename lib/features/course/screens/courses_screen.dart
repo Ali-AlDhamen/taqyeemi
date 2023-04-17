@@ -3,8 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taqyeemi/features/course/controller/course_controller.dart';
 import 'package:taqyeemi/features/course/screens/widgets/course_information.dart';
 
-import '../../../core/common/error_text.dart';
-import '../../../core/common/loader.dart';
+import '../../../core/core.dart';
 
 class CoursesScreen extends ConsumerWidget {
   const CoursesScreen({super.key});

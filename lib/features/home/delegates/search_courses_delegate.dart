@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taqyeemi/features/course/controller/course_controller.dart';
 import 'package:taqyeemi/features/course/screens/course_screen.dart';
 
-import '../../../core/common/loader.dart';
+import '../../../core/core.dart';
 
 class SearchCoursesDelegate extends SearchDelegate {
   final WidgetRef ref;

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:taqyeemi/models/course_comment_model.dart';
 import 'package:taqyeemi/theme/pallete.dart';
 
-import '../../../../core/utils.dart';
+import '../../../../core/core.dart';
 
 
 class CommentCard extends StatelessWidget {

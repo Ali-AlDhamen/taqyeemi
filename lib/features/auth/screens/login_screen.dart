@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taqyeemi/features/auth/controller/auth_controller.dart';
 import 'package:taqyeemi/features/auth/screens/signup_screen.dart';
 
-import '../../../core/common/loader.dart';
+
+import '../../../core/core.dart';
 import '../../../theme/pallete.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {

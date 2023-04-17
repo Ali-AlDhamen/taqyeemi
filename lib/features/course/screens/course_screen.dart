@@ -3,17 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:taqyeemi/core/common/error_text.dart';
-import 'package:taqyeemi/core/common/loader.dart';
+
+
 import 'package:taqyeemi/features/course/controller/course_controller.dart';
 import 'package:taqyeemi/features/course/screens/widgets/comment_card.dart';
 import 'package:taqyeemi/features/course/screens/widgets/diffuclty_bar.dart';
-import 'package:taqyeemi/models/course_diffuclty_model.dart';
 import 'package:taqyeemi/theme/pallete.dart';
 
-import '../../../core/utils.dart';
 import '../../../models/course_model.dart';
-
+import '../../../core/core.dart';
 class CourseScreen extends ConsumerStatefulWidget {
   static const String routeName = '/course';
   final String name;
@@ -37,11 +35,12 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
 
   void addComment(Course course) {
     ref.read(courseControllerProvider.notifier).addComment(
-        _gradeController.text.trim(),
-        _commentController.text.trim(),
-        _diffucltyController.text.trim(),
-        course,
-        context);
+          _gradeController.text.trim(),
+          _commentController.text.trim(),
+          _diffucltyController.text.trim(),
+          course,
+          context,
+        );
   }
 
   @override
@@ -54,6 +53,7 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
       ),
       body: ref.watch(courseByNameProvider(widget.name)).when(
           data: (course) {
+            course.comments.sort((a, b) => b.date.compareTo(a.date));
             return Column(
               children: [
                 Container(
