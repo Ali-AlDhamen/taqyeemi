@@ -3,7 +3,8 @@ import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../theme/pallete.dart';
-import '../delegates/search_courses__delegate.dart';
+import '../delegates/search_courses_delegate.dart';
+import '../delegates/search_instructors_delegate.dart';
 import '../drawers/navigation_drawer.dart';
 import '../../course/screens/courses_screen.dart';
 import '../../instructor/screens/instructors_screen.dart';
@@ -53,6 +54,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 showSearch(
                   context: context,
                   delegate: SearchCoursesDelegate(ref),
+                );
+              }
+              else {
+                showSearch(
+                  context: context,
+                  delegate: SearchInstructorsDelegate(ref),
                 );
               }
             },
