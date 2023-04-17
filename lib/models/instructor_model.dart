@@ -45,7 +45,7 @@ class Instructor {
       name: map['name'] as String,
       college: map['college'] as String,
       comments: List<InstructorComment>.from(
-        (map['comments'] as List<int>).map<InstructorComment>(
+        (map['comments'] as List<dynamic>).map<InstructorComment>(
           (x) => InstructorComment.fromMap(x as Map<String, dynamic>),
         ),
       ),

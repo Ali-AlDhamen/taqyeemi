@@ -5,6 +5,8 @@ class InstructorComment {
   final String id;
   final String instructorId;
   final String userId;
+  final String courseCode;
+  final String courseGrade;
   final String? comment;
   final DateTime date;
   final int teaching;
@@ -15,6 +17,8 @@ class InstructorComment {
     required this.id,
     required this.instructorId,
     required this.userId,
+    required this.courseCode,
+    required this.courseGrade,
     this.comment,
     required this.date,
     required this.teaching,
@@ -27,6 +31,8 @@ class InstructorComment {
     String? id,
     String? instructorId,
     String? userId,
+    String? courseCode,
+    String? courseGrade,
     String? comment,
     DateTime? date,
     int? teaching,
@@ -38,6 +44,8 @@ class InstructorComment {
       id: id ?? this.id,
       instructorId: instructorId ?? this.instructorId,
       userId: userId ?? this.userId,
+      courseCode: courseCode ?? this.courseCode,
+      courseGrade: courseGrade ?? this.courseGrade,
       comment: comment ?? this.comment,
       date: date ?? this.date,
       teaching: teaching ?? this.teaching,
@@ -52,6 +60,8 @@ class InstructorComment {
       'id': id,
       'instructorId': instructorId,
       'userId': userId,
+      'courseCode': courseCode,
+      'courseGrade': courseGrade,
       'comment': comment,
       'date': date.millisecondsSinceEpoch,
       'teaching': teaching,
@@ -66,6 +76,8 @@ class InstructorComment {
       id: map['id'] as String,
       instructorId: map['instructorId'] as String,
       userId: map['userId'] as String,
+      courseCode: map['courseCode'] as String,
+      courseGrade: map['courseGrade'] as String,
       comment: map['comment'] != null ? map['comment'] as String : null,
       date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
       teaching: map['teaching'] as int,
@@ -82,7 +94,7 @@ class InstructorComment {
 
   @override
   String toString() {
-    return 'InstructorComment(id: $id, instructorId: $instructorId, userId: $userId, comment: $comment, date: $date, teaching: $teaching, grading: $grading, treating: $treating, attendance: $attendance)';
+    return 'InstructorComment(id: $id, instructorId: $instructorId, userId: $userId, courseCode: $courseCode, courseGrade: $courseGrade, comment: $comment, date: $date, teaching: $teaching, grading: $grading, treating: $treating, attendance: $attendance)';
   }
 
   @override
@@ -92,6 +104,8 @@ class InstructorComment {
     return other.id == id &&
         other.instructorId == instructorId &&
         other.userId == userId &&
+        other.courseCode == courseCode &&
+        other.courseGrade == courseGrade &&
         other.comment == comment &&
         other.date == date &&
         other.teaching == teaching &&
@@ -105,6 +119,8 @@ class InstructorComment {
     return id.hashCode ^
         instructorId.hashCode ^
         userId.hashCode ^
+        courseCode.hashCode ^
+        courseGrade.hashCode ^
         comment.hashCode ^
         date.hashCode ^
         teaching.hashCode ^
