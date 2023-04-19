@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CourseDiffuclty {
   final String diffuclty;
   final double precentage;
-  final MaterialColor color;
+  final Color color;
   CourseDiffuclty({
     required this.diffuclty,
     required this.precentage,

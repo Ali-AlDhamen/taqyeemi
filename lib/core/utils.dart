@@ -88,32 +88,32 @@ Text courseDiffucltyLetter(double num) {
   if (num >= 90) {
     return const Text(
       'Average Grade (A)',
-      style: TextStyle(color: Colors.green, fontSize: 10),
+      style: TextStyle(color: Pallete.green, fontSize: 14),
     );
   } else if (num >= 80) {
     return const Text(
       'Average Grade (B)',
-      style: TextStyle(color: Colors.green, fontSize: 10),
+      style: TextStyle(color: Pallete.green, fontSize: 14),
     );
   } else if (num >= 70) {
     return const Text(
       'Average Grade (C)',
-      style: TextStyle(color: Colors.yellow, fontSize: 10),
+      style: TextStyle(color: Pallete.yellow, fontSize: 14),
     );
   } else if (num >= 60) {
     return const Text(
       'Average Grade (D)',
-      style: TextStyle(color: Colors.orange, fontSize: 10),
+      style: TextStyle(color: Pallete.orange, fontSize: 14),
     );
   } else {
     return const Text(
       'Average Grade (F)',
-      style: TextStyle(color: Colors.red, fontSize: 10),
+      style: TextStyle(color: Pallete.red, fontSize: 14),
     );
   }
 }
 
-MaterialColor gradeColor(double num) {
+Color gradeColor(double num) {
   if (num >= 90) {
     return Colors.green;
   } else if (num >= 80) {
@@ -131,12 +131,13 @@ List<CourseDiffuclty> diffucltyOverTotal(Course course) {
   if (course.comments.isEmpty) {
     return [
       CourseDiffuclty(
-          diffuclty: "Super Easy", precentage: 0, color: Colors.green),
-      CourseDiffuclty(diffuclty: "Easy", precentage: 0, color: Colors.green),
-      CourseDiffuclty(diffuclty: "Medium", precentage: 0, color: Colors.yellow),
-      CourseDiffuclty(diffuclty: "Hard", precentage: 0, color: Colors.red),
+          diffuclty: "Super Easy", precentage: 0, color: Pallete.green),
+      CourseDiffuclty(diffuclty: "Easy", precentage: 0, color: Pallete.green),
       CourseDiffuclty(
-          diffuclty: "Super Hard", precentage: 0, color: Colors.red),
+          diffuclty: "Medium", precentage: 0, color: Pallete.yellow),
+      CourseDiffuclty(diffuclty: "Hard", precentage: 0, color: Pallete.red),
+      CourseDiffuclty(
+          diffuclty: "Super Hard", precentage: 0, color: Pallete.red),
     ];
   }
   double superEasy = 0;
@@ -162,23 +163,23 @@ List<CourseDiffuclty> diffucltyOverTotal(Course course) {
     CourseDiffuclty(
         diffuclty: "Super Easy",
         precentage: superEasy / course.comments.length,
-        color: Colors.green),
+        color: Pallete.green),
     CourseDiffuclty(
         diffuclty: "Easy",
         precentage: easy / course.comments.length,
-        color: Colors.green),
+        color: Pallete.green),
     CourseDiffuclty(
         diffuclty: "Medium",
         precentage: medium / course.comments.length,
-        color: Colors.yellow),
+        color: Pallete.yellow),
     CourseDiffuclty(
         diffuclty: "Hard",
         precentage: hard / course.comments.length,
-        color: Colors.red),
+        color: Pallete.red),
     CourseDiffuclty(
         diffuclty: "Super Hard",
         precentage: superHard / course.comments.length,
-        color: Colors.red),
+        color: Pallete.red),
   ];
 }
 
@@ -190,38 +191,85 @@ Text averageGrade(Course course) {
   for (var element in course.comments) {
     sum += calculateGrade(element.grade);
   }
-  // return as A+
   return courseDiffucltyLetter(sum / course.comments.length);
 }
 
 GradeContainer getGradeColor(CourseComment comment) {
   if (comment.grade == "A+" || comment.grade == "A") {
-    return GradeContainer(text: comment.grade, color: Colors.green);
+     Text text = Text(
+      comment.difficulty,
+      style: const TextStyle(
+          color: Pallete.green, fontSize: 12, fontWeight: FontWeight.bold),
+    );
+    return GradeContainer(text: text, color: Pallete.darkGreen);
   } else if (comment.grade == "B+" || comment.grade == "B") {
-    return GradeContainer(text: comment.grade, color: Colors.yellow);
+     Text text = Text(
+      comment.difficulty,
+      style: const TextStyle(
+          color: Pallete.yellow, fontSize: 12, fontWeight: FontWeight.bold),
+    );
+    return GradeContainer(text: text, color: Pallete.darkYellow);
   } else if (comment.grade == "C+" || comment.grade == "C") {
-    return GradeContainer(text: comment.grade, color: Colors.orange);
-  } else if (comment.grade == "D+" || comment.grade == "D") {
-    return GradeContainer(text: comment.grade, color: Colors.red);
-  } else if (comment.grade == "F") {
-    return GradeContainer(text: comment.grade, color: Colors.red);
+     Text text = Text(
+      comment.difficulty,
+      style: const TextStyle(
+          color: Pallete.orange, fontSize: 12, fontWeight: FontWeight.bold),
+    );
+    return GradeContainer(text: text, color: Pallete.darkOrange);
+  } else {
+     Text text = Text(
+      comment.difficulty,
+      style: const TextStyle(
+          color: Pallete.red, fontSize: 12, fontWeight: FontWeight.bold),
+    );
+    return GradeContainer(text: text, color: Pallete.darkRed);
   }
-  return GradeContainer(text: comment.grade, color: Colors.red);
 }
 
 GradeContainer getDiffucltyColor(CourseComment comment) {
   if (comment.difficulty == "Super Easy") {
-    return GradeContainer(text: comment.difficulty, color: Colors.green);
+    Text text = Text(
+      comment.difficulty,
+      style: const TextStyle(
+          color: Pallete.green, fontSize: 12, fontWeight: FontWeight.bold),
+    );
+
+    return GradeContainer(text: text, color: Pallete.darkGreen);
   } else if (comment.difficulty == "Easy") {
-    return GradeContainer(text: comment.difficulty, color: Colors.green);
+    Text text = Text(
+      comment.difficulty,
+      style: const TextStyle(
+          color: Pallete.green, fontSize: 12, fontWeight: FontWeight.bold),
+    );
+    return GradeContainer(text: text, color: Pallete.darkGreen);
   } else if (comment.difficulty == "Medium") {
-    return GradeContainer(text: comment.difficulty, color: Colors.yellow);
+     Text text = Text(
+      comment.difficulty,
+      style: const TextStyle(
+          color: Pallete.yellow, fontSize: 12, fontWeight: FontWeight.bold),
+    );
+    return GradeContainer(text: text, color: Pallete.darkYellow);
   } else if (comment.difficulty == "Hard") {
-    return GradeContainer(text: comment.difficulty, color: Colors.orange);
+     Text text = Text(
+      comment.difficulty,
+      style: const TextStyle(
+          color: Pallete.orange, fontSize: 12, fontWeight: FontWeight.bold),
+    );
+    return GradeContainer(text: text, color: Pallete.darkOrange);
   } else if (comment.difficulty == "Super Hard") {
-    return GradeContainer(text: comment.difficulty, color: Colors.red);
+     Text text = Text(
+      comment.difficulty,
+      style: const TextStyle(
+          color: Pallete.red, fontSize: 10, fontWeight: FontWeight.bold),
+    );
+    return GradeContainer(text: text, color: Pallete.darkRed);
   }
-  return GradeContainer(text: comment.difficulty, color: Colors.red);
+   Text text = Text(
+      comment.difficulty,
+      style: const TextStyle(
+          color: Pallete.red, fontSize: 12, fontWeight: FontWeight.bold),
+    );
+  return GradeContainer(text: text, color: Pallete.darkRed);
 }
 
 String sinceWhen(DateTime date) {
@@ -291,5 +339,3 @@ Color textInstructorPrecentageColor(double num) {
     return Pallete.red;
   }
 }
-
-
