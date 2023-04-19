@@ -197,28 +197,28 @@ Text averageGrade(Course course) {
 GradeContainer getGradeColor(CourseComment comment) {
   if (comment.grade == "A+" || comment.grade == "A") {
      Text text = Text(
-      comment.difficulty,
+      comment.grade,
       style: const TextStyle(
           color: Pallete.green, fontSize: 12, fontWeight: FontWeight.bold),
     );
     return GradeContainer(text: text, color: Pallete.darkGreen);
   } else if (comment.grade == "B+" || comment.grade == "B") {
      Text text = Text(
-      comment.difficulty,
+      comment.grade,
       style: const TextStyle(
           color: Pallete.yellow, fontSize: 12, fontWeight: FontWeight.bold),
     );
     return GradeContainer(text: text, color: Pallete.darkYellow);
   } else if (comment.grade == "C+" || comment.grade == "C") {
      Text text = Text(
-      comment.difficulty,
+      comment.grade,
       style: const TextStyle(
           color: Pallete.orange, fontSize: 12, fontWeight: FontWeight.bold),
     );
     return GradeContainer(text: text, color: Pallete.darkOrange);
   } else {
      Text text = Text(
-      comment.difficulty,
+      comment.grade,
       style: const TextStyle(
           color: Pallete.red, fontSize: 12, fontWeight: FontWeight.bold),
     );
