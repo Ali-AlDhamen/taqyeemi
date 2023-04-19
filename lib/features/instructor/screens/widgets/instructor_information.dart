@@ -6,8 +6,8 @@ import '../../../../theme/pallete.dart';
 import '../instructor_screen.dart';
 
 class InstructorInformation extends StatelessWidget {
-  Instructor instructor;
-  InstructorInformation({super.key, required this.instructor});
+  final Instructor instructor;
+  const InstructorInformation({super.key, required this.instructor});
 
   void navigateToInstructorScreen(BuildContext context) {
     Navigator.pushNamed(context, InstructorScreen.routeName,
@@ -47,15 +47,22 @@ class InstructorInformation extends StatelessWidget {
             Container(
               width: 60,
               height: 30,
-              decoration:  BoxDecoration(
-                color: instructorPrecentage(calculateInstructor(instructor)),
+              decoration: BoxDecoration(
+                color: backGroundInstructorPrecentageColor(
+                    calculateInstructor(instructor)),
                 borderRadius: const BorderRadius.all(
                   Radius.circular(10),
                 ),
               ),
               child: Center(
                 child: Text(
-                    "${calculateInstructor(instructor) >= 100 ? 100 : calculateInstructor(instructor)} %"),
+                  "${calculateInstructor(instructor) >= 100 ? 100 : calculateInstructor(instructor)} %",
+                  style: TextStyle(
+                    color: textInstructorPrecentageColor(calculateInstructor(instructor)),
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
           ],

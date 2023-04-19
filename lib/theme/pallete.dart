@@ -10,11 +10,22 @@ final themeNotifierProvider =
 
 class Pallete {
   static const Color blueColor = Color(0xFF36a3c8);
-  static const Color blackColor = Color(0xFF181f24);
-  static const Color grayColor = Color(0xFF252a34);
+  static const Color blackColor = Color(0xFF1c1d22);
+  static const Color grayColor = Color(0xFF25262e);
   static const Color purpleColor = Color(0xFF5567fe);
   static const Color whiteColor = Colors.white;
   static const Color greyColor = Colors.grey;
+  static const Color green = Color(0xFF42ca91);
+  static const Color darkGreen = Color(0xFF234037);
+  static const Color yellow = Color(0xFFc8b162);
+  static const Color darkYellow = Color(0xFF3c3a2f);
+  static const Color red = Color(0xFFdf696a);
+  static const  Color darkRed = Color(0xFF432c30);
+  static const Color orange = Color(0xFFf8961e);
+  static const Color darkOrange = Color(0xFF3c2f1e);
+
+
+
 
   static var darkModeAppTheme = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: blackColor,

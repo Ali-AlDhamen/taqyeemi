@@ -22,6 +22,7 @@ class InstructorBar extends StatelessWidget {
         for (var element in instructor.comments) {
           result += element.teaching;
         }
+        
         return result ~/ instructor.comments.length;
       case "Treating":
         int result = 0;
@@ -64,12 +65,14 @@ class InstructorBar extends StatelessWidget {
               totalSteps: 100,
               currentStep: getPercentage(),
               size: 15,
-              selectedColor: instructorPrecentage(getPercentage() + 0.0),
+              selectedColor: textInstructorPrecentageColor(getPercentage() + 0.0),
               unselectedColor: Colors.grey,
               roundedEdges: const Radius.circular(10),
             ),
           ),
-          Text("${getPercentage()} %")
+          Text("${getPercentage()} %" , style: TextStyle(
+            color: textInstructorPrecentageColor(getPercentage() + 0.0),
+          ),)
         ],
       ),
     );

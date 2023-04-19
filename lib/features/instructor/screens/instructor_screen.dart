@@ -170,7 +170,7 @@ class _InstructorScreenState extends ConsumerState<InstructorScreen> {
                                 width: 100,
                                 height: 50,
                                 decoration:  BoxDecoration(
-                                  color: instructorPrecentage(calculateInstructor(instructor)),
+                                  color: backGroundInstructorPrecentageColor(calculateInstructor(instructor)),
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(10),
                                   ),
@@ -178,8 +178,9 @@ class _InstructorScreenState extends ConsumerState<InstructorScreen> {
                                 child: Center(
                                   child: Text(
                                     "${calculateInstructor(instructor) >= 100 ? 100 : calculateInstructor(instructor)} %",
-                                    style: const TextStyle(
+                                    style:  TextStyle(
                                       fontSize: 20,
+                                      color: textInstructorPrecentageColor(calculateInstructor(instructor)),
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),

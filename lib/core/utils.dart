@@ -2,6 +2,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:taqyeemi/models/course_comment_model.dart';
 import 'package:taqyeemi/models/instructor_model.dart';
+import 'package:taqyeemi/theme/pallete.dart';
 
 import '../features/course/screens/widgets/grade_container.dart';
 import '../models/course_diffuclty_model.dart';
@@ -263,17 +264,32 @@ double calculateInstructor(Instructor instructor) {
         element.teaching +
         element.treating;
   }
-  return sum / (instructor.comments.length * 4);
+  // round to 2 decimal places
+  return (sum / instructor.comments.length / 4).roundToDouble();
 }
 
-MaterialColor instructorPrecentage(double num) {
+Color backGroundInstructorPrecentageColor(double num) {
   if (num >= 80) {
-    return Colors.green;
+    return Pallete.darkGreen;
   } else if (num >= 70) {
-    return Colors.yellow;
+    return Pallete.darkYellow;
   } else if (num >= 60) {
-    return Colors.orange;
+    return Pallete.darkOrange;
   } else {
-    return Colors.red;
+    return Pallete.darkRed;
   }
 }
+
+Color textInstructorPrecentageColor(double num) {
+  if (num >= 80) {
+    return Pallete.green;
+  } else if (num >= 70) {
+    return Pallete.yellow;
+  } else if (num >= 60) {
+    return Pallete.orange;
+  } else {
+    return Pallete.red;
+  }
+}
+
+

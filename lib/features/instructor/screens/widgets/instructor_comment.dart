@@ -69,15 +69,15 @@ class InstructorCommentWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 height: 35,
                 decoration:  BoxDecoration(
-                  color: instructorPrecentage(comment.attendance + 0.0),
-                  borderRadius: BorderRadius.all(
+                  color: backGroundInstructorPrecentageColor(comment.attendance + 0.0),
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(10),
                   ),
                 ),
                 child: Center(
                   child: Text(
                     "Attendance ${comment.attendance}%",
-                    style: TextStyle(color: Colors.white, fontSize: 10),
+                    style: TextStyle(color: textInstructorPrecentageColor(comment.attendance + 0.0), fontSize: 10),
                   ),
                 ),
               ),
@@ -85,8 +85,8 @@ class InstructorCommentWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 height: 35,
                 decoration:  BoxDecoration(
-                  color: instructorPrecentage(comment.treating + 0.0),
-                  borderRadius: BorderRadius.all(
+                  color: backGroundInstructorPrecentageColor(comment.treating + 0.0),
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(10),
                   ),
                 ),
@@ -94,7 +94,7 @@ class InstructorCommentWidget extends StatelessWidget {
                   child: Text(
                     "Treating ${comment.treating}%",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: textInstructorPrecentageColor(comment.treating + 0.0),
                       fontSize: 10,
                     ),
                   ),
@@ -104,8 +104,8 @@ class InstructorCommentWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 height: 35,
                 decoration:  BoxDecoration(
-                  color: instructorPrecentage(comment.teaching + 0.0),
-                  borderRadius: BorderRadius.all(
+                  color: backGroundInstructorPrecentageColor(comment.teaching + 0.0),
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(10),
                   ),
                 ),
@@ -113,7 +113,7 @@ class InstructorCommentWidget extends StatelessWidget {
                   child: Text(
                     "Teaching ${comment.teaching}%",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: textInstructorPrecentageColor(comment.teaching + 0.0),
                       fontSize: 10,
                     ),
                   ),
@@ -123,8 +123,8 @@ class InstructorCommentWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 height: 35,
                 decoration:  BoxDecoration(
-                  color: instructorPrecentage(comment.grading + 0.0),
-                  borderRadius: BorderRadius.all(
+                  color: backGroundInstructorPrecentageColor(comment.grading + 0.0),
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(10),
                   ),
                 ),
@@ -132,7 +132,7 @@ class InstructorCommentWidget extends StatelessWidget {
                   child: Text(
                     "Grading ${comment.grading}%",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: textInstructorPrecentageColor(comment.grading + 0.0),
                       fontSize: 10,
                     ),
                   ),
