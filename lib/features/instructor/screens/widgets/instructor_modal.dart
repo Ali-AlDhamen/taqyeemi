@@ -18,7 +18,7 @@ class InstructorModal extends ConsumerWidget {
   final TextEditingController commentController;
   final void Function()? onPressed;
 
-  InstructorModal({
+  const InstructorModal({super.key, 
     required this.courseCodeController,
     required this.courseGradeController,
     required this.instructorTeachingController,

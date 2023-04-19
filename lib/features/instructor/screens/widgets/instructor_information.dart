@@ -35,13 +35,13 @@ class InstructorInformation extends StatelessWidget {
               children: [
                 Text(
                   instructor.name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(instructor.college,
-                    style: TextStyle(fontSize: 16, color: Colors.grey)),
+                    style: const TextStyle(fontSize: 16, color: Colors.grey)),
               ],
             ),
             Container(

@@ -162,7 +162,7 @@ class _InstructorScreenState extends ConsumerState<InstructorScreen> {
                                     ),
                                   ),
                                   Text(instructor.college,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 16, color: Colors.grey)),
                                 ],
                               ),
@@ -171,7 +171,7 @@ class _InstructorScreenState extends ConsumerState<InstructorScreen> {
                                 height: 50,
                                 decoration:  BoxDecoration(
                                   color: backGroundInstructorPrecentageColor(calculateInstructor(instructor)),
-                                  borderRadius: BorderRadius.all(
+                                  borderRadius: const BorderRadius.all(
                                     Radius.circular(10),
                                   ),
                                 ),

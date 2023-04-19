@@ -15,8 +15,6 @@ class InstructorsScreen extends ConsumerWidget {
         children: [
           ref.watch(instructorsProvider).when(
                 data: (instructors) {
-                  
-                  print(instructors);
                   return Expanded(
                     child: ListView.builder(
                       itemCount: instructors.length,
@@ -28,7 +26,8 @@ class InstructorsScreen extends ConsumerWidget {
                     ),
                   );
                 },
-                error: (error, stackTrace) => ErrorText(error: stackTrace.toString()),
+                error: (error, stackTrace) =>
+                    ErrorText(error: stackTrace.toString()),
                 loading: () => const Loader(),
               ),
         ],
