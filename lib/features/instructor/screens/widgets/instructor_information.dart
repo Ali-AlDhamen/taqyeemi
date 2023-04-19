@@ -45,8 +45,9 @@ class InstructorInformation extends StatelessWidget {
               ],
             ),
             Container(
-              width: 60,
-              height: 30,
+              width: 80,
+              height: 40,
+              
               decoration: BoxDecoration(
                 color: backGroundInstructorPrecentageColor(
                     calculateInstructor(instructor)),
