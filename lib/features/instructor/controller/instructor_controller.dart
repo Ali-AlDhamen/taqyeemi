@@ -53,6 +53,7 @@ class InstructorController extends StateNotifier<bool> {
       college: instructorCollege,
       comments: [],
     );
+    await Future.delayed(const Duration(seconds: 2));
 
     final result = await _instructorRepository.addInstructor(instructor);
     state = false;
@@ -78,17 +79,20 @@ class InstructorController extends StateNotifier<bool> {
     state = true;
     final userId = _ref.read(userProvider)!.userId;
     InstructorComment instructorComment = InstructorComment(
-        id: const Uuid().v4(),
-        instructorId: instructorName,
-        userId: userId,
-        courseGrade: courseGrade,
-        comment: comment,
-        teaching: teaching,
-        grading: grading,
-        treating: treating,
-        attendance: attendance,
-        courseCode: courseCode,
-        date: DateTime.now());
+      id: const Uuid().v4(),
+      instructorId: instructorName,
+      userId: userId,
+      courseGrade: courseGrade,
+      comment: comment,
+      teaching: teaching,
+      grading: grading,
+      treating: treating,
+      attendance: attendance,
+      courseCode: courseCode,
+      date: DateTime.now(),
+    );
+
+    await Future.delayed(const Duration(seconds: 2));
 
     final result = await _instructorRepository.addComment(instructorComment);
     state = false;

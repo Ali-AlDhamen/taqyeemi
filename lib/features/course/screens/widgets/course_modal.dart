@@ -155,6 +155,5 @@ class CourseModal extends StatelessWidget {
         ],
       ),
     );
-    ;
   }
 }

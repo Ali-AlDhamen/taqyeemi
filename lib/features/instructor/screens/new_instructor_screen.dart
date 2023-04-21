@@ -49,7 +49,7 @@ class _NewInstructorScreenState extends ConsumerState<NewInstructorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.read(instructorControllerProvider);
+    final isLoading = ref.watch(instructorControllerProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Instructor'),

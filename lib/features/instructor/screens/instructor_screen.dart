@@ -5,7 +5,6 @@ import 'package:taqyeemi/features/instructor/screens/widgets/instructor_comment.
 import 'package:taqyeemi/features/instructor/screens/widgets/instructor_bar.dart';
 import 'package:taqyeemi/features/instructor/screens/widgets/instructor_modal.dart';
 
-
 import '../../../theme/pallete.dart';
 import '../controller/instructor_controller.dart';
 
@@ -125,6 +124,7 @@ class _InstructorScreenState extends ConsumerState<InstructorScreen> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final isLoading = ref.watch(instructorControllerProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Instructor'),
@@ -169,8 +169,9 @@ class _InstructorScreenState extends ConsumerState<InstructorScreen> {
                               Container(
                                 width: 100,
                                 height: 50,
-                                decoration:  BoxDecoration(
-                                  color: backGroundInstructorPrecentageColor(calculateInstructor(instructor)),
+                                decoration: BoxDecoration(
+                                  color: backGroundInstructorPrecentageColor(
+                                      calculateInstructor(instructor)),
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(10),
                                   ),
@@ -178,9 +179,10 @@ class _InstructorScreenState extends ConsumerState<InstructorScreen> {
                                 child: Center(
                                   child: Text(
                                     "${calculateInstructor(instructor) >= 100 ? 100 : calculateInstructor(instructor)} %",
-                                    style:  TextStyle(
+                                    style: TextStyle(
                                       fontSize: 20,
-                                      color: textInstructorPrecentageColor(calculateInstructor(instructor)),
+                                      color: textInstructorPrecentageColor(
+                                          calculateInstructor(instructor)),
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -189,10 +191,22 @@ class _InstructorScreenState extends ConsumerState<InstructorScreen> {
                             ],
                           ),
                         ),
-                        InstructorBar(instructor: instructor, type: "Teaching",),
-                        InstructorBar(instructor: instructor, type: "Treating",),
-                        InstructorBar(instructor: instructor, type: "Grading",),
-                        InstructorBar(instructor: instructor, type: "Attendance",),
+                        InstructorBar(
+                          instructor: instructor,
+                          type: "Teaching",
+                        ),
+                        InstructorBar(
+                          instructor: instructor,
+                          type: "Treating",
+                        ),
+                        InstructorBar(
+                          instructor: instructor,
+                          type: "Grading",
+                        ),
+                        InstructorBar(
+                          instructor: instructor,
+                          type: "Attendance",
+                        ),
                         const SizedBox(
                           height: 30,
                         ),
@@ -207,14 +221,16 @@ class _InstructorScreenState extends ConsumerState<InstructorScreen> {
                             onPressed: () {
                               _showInputForm(context);
                             },
-                            child: const Text(
-                              "Add Rating",
-                              style: TextStyle(
-                                color: Pallete.whiteColor,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                            child: isLoading
+                                ? const Loader()
+                                : const Text(
+                                    "Add Rating",
+                                    style: TextStyle(
+                                      color: Pallete.whiteColor,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                           ),
                         ),
                       ],
@@ -222,7 +238,6 @@ class _InstructorScreenState extends ConsumerState<InstructorScreen> {
                   ),
                   Expanded(
                     child: ListView.builder(
-                      
                       shrinkWrap: true,
                       reverse: false,
                       itemCount: instructor.comments.length,

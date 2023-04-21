@@ -1,4 +1,3 @@
-import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -46,6 +45,7 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final isLoading = ref.watch(courseControllerProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -109,14 +109,16 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
                         ),
                         child: TextButton(
                           onPressed: () => _showInputForm(context, course),
-                          child: const Text(
-                            "Add Rating",
-                            style: TextStyle(
-                              color: Pallete.whiteColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          child: isLoading
+                              ? const Loader()
+                              : const Text(
+                                  "Add Rating",
+                                  style: TextStyle(
+                                    color: Pallete.whiteColor,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                         ),
                       ),
                     ],
