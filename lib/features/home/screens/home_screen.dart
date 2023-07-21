@@ -5,10 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../theme/pallete.dart';
 import '../delegates/search_courses_delegate.dart';
 import '../delegates/search_instructors_delegate.dart';
+import '../drawers/bottom_sheet_page.dart';
 import '../drawers/navigation_drawer.dart';
 import '../../course/screens/courses_screen.dart';
 import '../../instructor/screens/instructors_screen.dart';
-
 
 class HomeScreen extends ConsumerStatefulWidget {
   static const String routeName = "/home";
@@ -16,8 +16,8 @@ class HomeScreen extends ConsumerStatefulWidget {
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _HomeScreenState();
 }
-class _HomeScreenState extends ConsumerState<HomeScreen> {
 
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget _child = const CoursesScreen();
 
   final List<Widget> _children = [
@@ -33,6 +33,29 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   void displayDrawer(BuildContext context) {
     Scaffold.of(context).openDrawer();
+  }
+
+  void displayBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.all(20),
+            decoration: const BoxDecoration(
+              // bit darker white
+              color: Color(0xffF2F2F2),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+            ),
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height * 0.9,
+            child: const BottomSheetPage());
+      },
+      // full screen
+      isScrollControlled: true,
+    );
   }
 
   @override
@@ -55,8 +78,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   context: context,
                   delegate: SearchCoursesDelegate(ref),
                 );
-              }
-              else {
+              } else {
                 showSearch(
                   context: context,
                   delegate: SearchInstructorsDelegate(ref),
@@ -83,6 +105,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ],
       ),
+      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Pallete.purpleColor,
+          foregroundColor: Pallete.whiteColor,
+          onPressed: () => displayBottomSheet(context),
+          child: Image.asset(
+            'assets/images/boty.png',
+            height: 35,
+            color: Pallete.whiteColor,
+          )),
       drawer: const AppNavigationDrawer(),
     );
   }

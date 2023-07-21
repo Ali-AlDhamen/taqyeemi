@@ -20,7 +20,7 @@ dependencies:
   http: ^0.13.5
   flutter_zoom_drawer: ^3.0.3
   circle_nav_bar: ^2.0.1+1
-  flutter_native_splash: ^2.2.16
+  flutter_native_splash: ^2.2.19
   awesome_snackbar_content: ^0.1.0
   cloud_firestore: ^4.3.1
   routemaster: ^1.0.1
@@ -38,6 +38,8 @@ dependencies:
   animations: ^2.0.7
   shared_preferences: ^2.0.18
   uuid: ^3.0.7
+  flutter_launcher_icons: ^0.13.1
+  chat_bubbles: ^1.4.0
 
 dev_dependencies:
   flutter_test:

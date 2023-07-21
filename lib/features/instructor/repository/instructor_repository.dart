@@ -51,8 +51,7 @@ class InstructorRepository {
     });
   }
 
-  FutureVoid addComment(
-      InstructorComment comment) async {
+  FutureVoid addComment(InstructorComment comment) async {
     try {
       return right(_instructor.doc(comment.instructorId).update({
         'comments': FieldValue.arrayUnion([comment.toMap()])
@@ -83,4 +82,6 @@ class InstructorRepository {
       }).toList();
     });
   }
+
+  
 }
