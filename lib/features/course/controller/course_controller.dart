@@ -41,7 +41,6 @@ class CourseController extends StateNotifier<bool> {
       required String courseCode,
       required int courseCreditHours,
       required BuildContext context}) async {
-        
     state = true;
     Course course = Course(
         id: courseCode,
@@ -71,7 +70,6 @@ class CourseController extends StateNotifier<bool> {
 
     final user = _ref.read(userProvider)!;
 
-
     CourseComment courseComment = CourseComment(
         id: "${course.name}${DateTime.now()}",
         comment: comment,
@@ -92,5 +90,12 @@ class CourseController extends StateNotifier<bool> {
 
   Stream<List<Course>> searchCourses(String query) {
     return _courseRepository.searchCourses(query);
+  }
+
+  Future<String> getCoursesDataFormated() async {
+    state = true;
+    final data = await _courseRepository.getCoursesDataFormated();
+    state = false;
+    return data;
   }
 }

@@ -40,6 +40,7 @@ class Pallete {
       backgroundColor: grayColor,
     ),
     primaryColor: whiteColor,
+    // ignore: deprecated_member_use
     backgroundColor: grayColor,
   );
 
@@ -60,6 +61,7 @@ class Pallete {
       backgroundColor: whiteColor,
     ),
     primaryColor: blackColor,
+    // ignore: deprecated_member_use
     backgroundColor: whiteColor,
     textTheme: const TextTheme(
       bodyLarge: TextStyle(

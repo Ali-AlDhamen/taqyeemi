@@ -21,7 +21,7 @@ class SuggestionMessage extends ConsumerWidget {
         child: Center(
           child: Text(
             message,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
               color: Colors.grey,

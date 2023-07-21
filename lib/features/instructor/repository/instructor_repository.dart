@@ -7,6 +7,7 @@ import '../../../core/constants/firebase_constants.dart';
 import '../../../core/types/failure.dart';
 import '../../../core/providers/firebase_providers.dart';
 import '../../../core/types/type_defs.dart';
+import '../../../core/utils.dart';
 import '../../../models/instructor_model.dart';
 
 final instructorRepositoryProvider = Provider((ref) {
@@ -83,5 +84,27 @@ class InstructorRepository {
     });
   }
 
-  
+  Future<String> getInstructorsDataFormated() async {
+    final instructorsDocs = await _instructor.get();
+    final instructors = instructorsDocs.docs.map((doc) {
+      return Instructor.fromMap(doc.data() as Map<String, dynamic>);
+    }).toList();
+
+    String instructorsData = '';
+    for (int i = 0; i < instructors.length; i++) {
+      instructorsData += 'instructorName: ${instructors[i].name}\n';
+      final data = getInstructorStats(instructors[i].comments);
+      final sum = data.reduce((value, element) => value + element);
+      instructorsData += 'his grading level: ${data[0]}%\n';
+      instructorsData += 'his forgivness level at attendance: ${data[1]}%\n';
+      instructorsData += 'his teaching skills: ${data[2]}%\n';
+      instructorsData += 'his kindness level: ${data[3]}%\n';
+      instructorsData += 'his overall level: ${sum / data.length}%\n';
+      instructorsData += 'comments:\n';
+      for (var comment in instructors[i].comments) {
+        instructorsData += '${comment.comment}\n';
+      }
+    }
+    return instructorsData;
+  }
 }

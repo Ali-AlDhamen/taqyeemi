@@ -115,4 +115,11 @@ class InstructorController extends StateNotifier<bool> {
   Stream<Instructor> getInstructorByName(String name) {
     return _instructorRepository.getInstructorByName(name);
   }
+
+  Future<String> getInstructorsDataFormated() {
+    state = true;
+    final data = _instructorRepository.getInstructorsDataFormated();
+    state = false;
+    return data;
+  }
 }

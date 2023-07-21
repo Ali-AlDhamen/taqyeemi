@@ -79,4 +79,28 @@ class CourseRepository {
       }).toList();
     });
   }
+
+  Future<String> getCoursesDataFormated() async {
+    final coursesDocs = await _courses.get();
+    final courses = coursesDocs.docs.map((doc) {
+      return Course.fromMap(doc.data() as Map<String, dynamic>);
+    }).toList();
+
+    String coursesData = '';
+    for (var course in courses) {
+      coursesData += 'Course : ${course.name}\n';
+      double average = getCourseAverageInNumber(course.comments);
+      average = (average * 100).round() / 100;
+      double difficulty = getCourseDiffucltyInNumber(course.comments);
+      difficulty = (difficulty * 100).round() / 100;
+      coursesData += 'courseAverage : $average/100 (100 means highest)\n';
+      coursesData += 'courseDifficulty : $difficulty/5 (5 means easiest)\n';
+      coursesData += 'courseComments :\n';
+      for (var comment in course.comments) {
+        coursesData += '${comment.comment}\n';
+      }
+      coursesData += '\n';
+    }
+    return coursesData;
+  }
 }

@@ -7,6 +7,7 @@ import 'package:taqyeemi/theme/pallete.dart';
 import '../features/course/screens/widgets/grade_container.dart';
 import '../models/course_diffuclty_model.dart';
 import '../models/course_model.dart';
+import '../models/instructor_comment_model.dart';
 
 void showSnackBar(BuildContext context, String message) {
   final snackBar = SnackBar(
@@ -196,28 +197,28 @@ Text averageGrade(Course course) {
 
 GradeContainer getGradeColor(CourseComment comment) {
   if (comment.grade == "A+" || comment.grade == "A") {
-     Text text = Text(
+    Text text = Text(
       comment.grade,
       style: const TextStyle(
           color: Pallete.green, fontSize: 12, fontWeight: FontWeight.bold),
     );
     return GradeContainer(text: text, color: Pallete.darkGreen);
   } else if (comment.grade == "B+" || comment.grade == "B") {
-     Text text = Text(
+    Text text = Text(
       comment.grade,
       style: const TextStyle(
           color: Pallete.yellow, fontSize: 12, fontWeight: FontWeight.bold),
     );
     return GradeContainer(text: text, color: Pallete.darkYellow);
   } else if (comment.grade == "C+" || comment.grade == "C") {
-     Text text = Text(
+    Text text = Text(
       comment.grade,
       style: const TextStyle(
           color: Pallete.orange, fontSize: 12, fontWeight: FontWeight.bold),
     );
     return GradeContainer(text: text, color: Pallete.darkOrange);
   } else {
-     Text text = Text(
+    Text text = Text(
       comment.grade,
       style: const TextStyle(
           color: Pallete.red, fontSize: 12, fontWeight: FontWeight.bold),
@@ -243,32 +244,32 @@ GradeContainer getDiffucltyColor(CourseComment comment) {
     );
     return GradeContainer(text: text, color: Pallete.darkGreen);
   } else if (comment.difficulty == "Medium") {
-     Text text = Text(
+    Text text = Text(
       comment.difficulty,
       style: const TextStyle(
           color: Pallete.yellow, fontSize: 12, fontWeight: FontWeight.bold),
     );
     return GradeContainer(text: text, color: Pallete.darkYellow);
   } else if (comment.difficulty == "Hard") {
-     Text text = Text(
+    Text text = Text(
       comment.difficulty,
       style: const TextStyle(
           color: Pallete.orange, fontSize: 12, fontWeight: FontWeight.bold),
     );
     return GradeContainer(text: text, color: Pallete.darkOrange);
   } else if (comment.difficulty == "Super Hard") {
-     Text text = Text(
+    Text text = Text(
       comment.difficulty,
       style: const TextStyle(
           color: Pallete.red, fontSize: 10, fontWeight: FontWeight.bold),
     );
     return GradeContainer(text: text, color: Pallete.darkRed);
   }
-   Text text = Text(
-      comment.difficulty,
-      style: const TextStyle(
-          color: Pallete.red, fontSize: 12, fontWeight: FontWeight.bold),
-    );
+  Text text = Text(
+    comment.difficulty,
+    style: const TextStyle(
+        color: Pallete.red, fontSize: 12, fontWeight: FontWeight.bold),
+  );
   return GradeContainer(text: text, color: Pallete.darkRed);
 }
 
@@ -338,4 +339,64 @@ Color textInstructorPrecentageColor(double num) {
   } else {
     return Pallete.red;
   }
+}
+
+int convertCourseDiffuclty(String diffuclty) {
+  if (diffuclty == "Super Easy") {
+    return 5;
+  } else if (diffuclty == "Easy") {
+    return 4;
+  } else if (diffuclty == "Medium") {
+    return 3;
+  } else if (diffuclty == "Hard") {
+    return 2;
+  } else if (diffuclty == "Super Hard") {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+List<double> getInstructorStats(List<InstructorComment> comments) {
+  if (comments.isEmpty) {
+    return [0, 0, 0, 0];
+  }
+  double sumGrading = 0;
+  double sumAttendance = 0;
+  double sumTeaching = 0;
+  double sumTreating = 0;
+  for (var element in comments) {
+    sumGrading += element.grading;
+    sumAttendance += element.attendance;
+    sumTeaching += element.teaching;
+    sumTreating += element.treating;
+  }
+  return [
+    sumGrading / comments.length,
+    sumAttendance / comments.length,
+    sumTeaching / comments.length,
+    sumTreating / comments.length
+  ];
+}
+
+double getCourseAverageInNumber(List<CourseComment> comments) {
+  if (comments.isEmpty) {
+    return 0;
+  }
+  double sum = 0;
+  for (var element in comments) {
+    sum += calculateGrade(element.grade);
+  }
+  return sum / comments.length;
+}
+
+double getCourseDiffucltyInNumber(List<CourseComment> comments){
+  if (comments.isEmpty) {
+    return 0;
+  }
+  double sum = 0;
+  for (var element in comments) {
+    sum += convertCourseDiffuclty(element.difficulty);
+  }
+  return sum / comments.length;
 }
