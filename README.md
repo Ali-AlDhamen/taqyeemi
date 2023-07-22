@@ -3,15 +3,26 @@ Taqyeemi is a student-centric app developed using Flutter and Firebase, designed
 
 ## Features
 
-1. **Course Ratings and Comments**: Taqyeemi allows users to view ratings and comments for all college courses, helping them make informed decisions about their academic pursuits.
+- **Course Ratings and Comments**: Taqyeemi allows users to view ratings and comments for all college courses, helping them make informed decisions about their academic pursuits.
 
-2. **Instructor Ratings and Comments**: Users can also access ratings and comments for all instructors, giving them insights into the teaching quality and approach.
+- **Instructor Ratings and Comments**: Users can also access ratings and comments for all instructors, giving them insights into the teaching quality and approach.
 
-3. **Searching**: Taqyeemi features a search functionality, enabling users to find specific courses or instructors effortlessly.
+- **Searching**: Taqyeemi features a search functionality, enabling users to find specific courses or instructors effortlessly.
 
-4. **Adding Missing Courses/Instructors**: The app allows users to contribute by adding missing courses or instructors, fostering a collaborative community for knowledge sharing.
+- **Adding Missing Courses/Instructors**: The app allows users to contribute by adding missing courses or instructors, fostering a collaborative community for knowledge sharing.
   
-5. **TaqyeemiGPT Integration**: One of the unique features of Taqyeemi is the integration of TaqyeemiGPT, an AI-powered virtual assistant that can answer any questions related to instructors and courses. Users can seek instant guidance and information using this powerful feature.
+- **TaqyeemiGPT Integration**: One of the unique features of Taqyeemi is the integration of TaqyeemiGPT, an AI-powered virtual assistant that can answer any questions related to instructors and courses. Users can seek instant guidance and information using this powerful feature.
+
+
+### Restaurant Interface
+
+<div style="display: flex;">
+  <img src="./assets/images/s1.png" height="400">
+  <img src="./assets/images/s2.png" height="400">
+  <img src="./assets/images/s3.png" height="400">
+  <img src="./assets/images/s4.png" height="400">
+</div>
+
 
 ## Installation
 
