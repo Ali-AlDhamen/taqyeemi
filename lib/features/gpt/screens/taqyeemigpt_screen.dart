@@ -22,15 +22,11 @@ class _TaqyeemiGPTScreenState extends ConsumerState<TaqyeemiGPTScreen> {
     MessageModel(message: "I`m TaqyeemiGPT, how can I help You?", type: "bot")
   ];
 
- 
-
   @override
   void dispose() {
     _textEditingController.dispose();
     super.dispose();
   }
-
-  
 
   void sendMessage(String message) async {
     setState(() {
@@ -76,14 +72,14 @@ class _TaqyeemiGPTScreenState extends ConsumerState<TaqyeemiGPTScreen> {
                 ),
                 const SizedBox(height: 10),
                 SuggestionMessage(
-                    "who`s the best instructor?",
-                    sendMessage),
-                SuggestionMessage("what is the best course?", sendMessage),
+                  "Who is the best instructor?",
+                  sendMessage,
+                ),
+                SuggestionMessage("How can I get a good grade in physics?", sendMessage),
                 SuggestionMessage(
-                    "which course has least average?", sendMessage),
+                    "Which course has highest average?", sendMessage),
                 SuggestionMessage(
-                    "what students think of Ali AlDhamen?",
-                    sendMessage),
+                    "What students think of Ali AlDhamen?", sendMessage),
                 const SizedBox(height: 10),
                 Expanded(
                   child: ListView.builder(

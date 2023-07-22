@@ -25,6 +25,8 @@ class GPTRepository {
     String courseData = await ref
         .read(courseControllerProvider.notifier)
         .getCoursesDataFormated();
+    print(courseData);
+    
 
     String prompt = """    
                  you have new role now called taqyeemiGPT, you will be provided with data of instructors and courses.
@@ -44,6 +46,8 @@ class GPTRepository {
                 heres the courses data:
                 $courseData
               """;
+
+    print(prompt);
     messages.add({
       'role': 'system',
       'content': prompt,
@@ -74,7 +78,7 @@ class GPTRepository {
   Future<String> taqyeemiGPTAsk(String messge) async {
     messages.add({
       'role': 'user',
-      'content': messge,
+      'content': "$messge, pls answer the questions from data i have provided to u",
     });
     try {
       final res = await http.post(
