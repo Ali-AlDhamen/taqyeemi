@@ -25,7 +25,6 @@ class GPTRepository {
     String courseData = await ref
         .read(courseControllerProvider.notifier)
         .getCoursesDataFormated();
-    print(courseData);
     
 
     String prompt = """    
@@ -47,7 +46,6 @@ class GPTRepository {
                 $courseData
               """;
 
-    print(prompt);
     messages.add({
       'role': 'system',
       'content': prompt,

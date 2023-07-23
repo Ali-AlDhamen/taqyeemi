@@ -26,7 +26,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     const InstructorsScreen(),
   ];
 
-  void loadData(){
+  void loadData() {
     Future.delayed(
       const Duration(seconds: 1),
       () => ref.read(gptRepositoryProvider).taqyeemiGPTInit(),
@@ -55,9 +55,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       builder: (context) {
         return const TaqyeemiGPTScreen();
       },
-      // full screen
       isScrollControlled: true,
     );
+  }
+
+  void handleSearch() {
+    if (_child is CoursesScreen) {
+      showSearch(
+        context: context,
+        delegate: SearchCoursesDelegate(ref),
+      );
+    } else {
+      showSearch(
+        context: context,
+        delegate: SearchInstructorsDelegate(ref),
+      );
+    }
   }
 
   @override
@@ -74,19 +87,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         }),
         actions: [
           IconButton(
-            onPressed: () {
-              if (_child is CoursesScreen) {
-                showSearch(
-                  context: context,
-                  delegate: SearchCoursesDelegate(ref),
-                );
-              } else {
-                showSearch(
-                  context: context,
-                  delegate: SearchInstructorsDelegate(ref),
-                );
-              }
-            },
+            onPressed: () => handleSearch(),
             icon: const Icon(Icons.search),
           ),
         ],

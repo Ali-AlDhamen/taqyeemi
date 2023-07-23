@@ -1,7 +1,7 @@
-import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taqyeemi/core/core.dart';
+import 'package:taqyeemi/features/gpt/screens/widgets/chat_messages.dart';
 import 'package:taqyeemi/features/gpt/screens/widgets/suggestion_message.dart';
 import 'package:taqyeemi/models/messge_model.dart';
 import 'package:taqyeemi/theme/pallete.dart';
@@ -18,7 +18,7 @@ class TaqyeemiGPTScreen extends ConsumerStatefulWidget {
 class _TaqyeemiGPTScreenState extends ConsumerState<TaqyeemiGPTScreen> {
   final TextEditingController _textEditingController = TextEditingController();
 
-  final messges = [
+  final messages = [
     MessageModel(message: "I`m TaqyeemiGPT, how can I help You?", type: "bot")
   ];
 
@@ -30,14 +30,14 @@ class _TaqyeemiGPTScreenState extends ConsumerState<TaqyeemiGPTScreen> {
 
   void sendMessage(String message) async {
     setState(() {
-      messges.add(MessageModel(message: message, type: "user"));
+      messages.add(MessageModel(message: message, type: "user"));
       _textEditingController.clear();
     });
     final gptMessage = await ref
         .read(gptControllerProvider.notifier)
-        .taqyeemiGPTAsk((messges[messges.length - 1].message));
+        .taqyeemiGPTAsk((messages[messages.length - 1].message));
     setState(() {
-      messges.add(MessageModel(message: gptMessage, type: "bot"));
+      messages.add(MessageModel(message: gptMessage, type: "bot"));
     });
   }
 
@@ -81,30 +81,7 @@ class _TaqyeemiGPTScreenState extends ConsumerState<TaqyeemiGPTScreen> {
                 SuggestionMessage(
                     "What students think of Ali AlDhamen?", sendMessage),
                 const SizedBox(height: 10),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: messges.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.only(top: 5),
-                        child: BubbleSpecialThree(
-                          text: messges[index].message,
-                          color: messges[index].type == "bot"
-                              ? Colors.white
-                              : Pallete.purpleColor,
-                          tail: true,
-                          isSender: messges[index].type == "bot" ? false : true,
-                          textStyle: TextStyle(
-                            color: messges[index].type == "bot"
-                                ? Colors.black
-                                : Colors.white,
-                            fontSize: 14,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                ChatMessages(messages: messages),
               ],
             ),
           ),
@@ -167,3 +144,4 @@ class _TaqyeemiGPTScreenState extends ConsumerState<TaqyeemiGPTScreen> {
     );
   }
 }
+
