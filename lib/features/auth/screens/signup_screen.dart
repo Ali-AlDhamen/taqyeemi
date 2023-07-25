@@ -54,109 +54,112 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       body: SafeArea(
           child: SizedBox(
         width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 70,
-            ),
-            const Text(
-              "Create new account",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Pallete.whiteColor,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 70,
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Text(
-              "please fill in the form to continue",
-              style: TextStyle(
-                fontSize: 14,
-                color: Pallete.greyColor,
+              const Text(
+                "Create new account",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Pallete.whiteColor,
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    CustomTextField(
-                      controller: _fullNameController,
-                      hintText: "Full Name",
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter your full name";
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    CustomTextField(
-                        controller: _emailController,
-                        hintText: "Email",
-                        validator: emailValidator),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    CustomTextField(
-                      controller: _mobileNumberController,
-                      hintText: "Phone Number",
-                      validator: ((value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter your phone number";
-                        }
-                        return null;
-                      }),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    CustomPasswordField(
-                      controller: _passwordController,
-                    ),
-                    const SizedBox(
-                      height: 80,
-                    ),
-                    AuthButton(
-                      onPressed: signUpWithEmail,
-                      text: "Sign Up",
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Have an Account?",
-                          style: TextStyle(
-                            color: Pallete.whiteColor,
-                            fontSize: 14,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () => navigateToSignInScreen(context),
-                          child: const Text(
-                            "Sign In",
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
+                "please fill in the form to continue",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Pallete.greyColor,
+                ),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      CustomTextField(
+                        controller: _fullNameController,
+                        hintText: "Full Name",
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter your full name";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      CustomTextField(
+                          controller: _emailController,
+                          hintText: "Email",
+                          validator: emailValidator),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      CustomTextField(
+                        controller: _mobileNumberController,
+                        hintText: "Phone Number",
+                        validator: ((value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter your phone number";
+                          }
+                          return null;
+                        }),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      CustomPasswordField(
+                        controller: _passwordController,
+                      ),
+                      const SizedBox(
+                        height: 80,
+                      ),
+                
+                      AuthButton(
+                        onPressed: signUpWithEmail,
+                        text: "Sign Up",
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Have an Account?",
                             style: TextStyle(
-                              color: Pallete.purpleColor,
+                              color: Pallete.whiteColor,
                               fontSize: 14,
-                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ))
-          ],
+                          TextButton(
+                            onPressed: () => navigateToSignInScreen(context),
+                            child: const Text(
+                              "Sign In",
+                              style: TextStyle(
+                                color: Pallete.purpleColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ))
+            ],
+          ),
         ),
       )),
     );

@@ -58,7 +58,6 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
               children: [
                 Container(
                   margin: const EdgeInsets.all(10),
-                  height: height * 0.5,
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Pallete.grayColor,

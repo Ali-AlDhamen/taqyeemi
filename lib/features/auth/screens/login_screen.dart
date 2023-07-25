@@ -50,98 +50,100 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
         body: SafeArea(
       child: SizedBox(
         width: double.infinity,
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          const SizedBox(
-            height: 80,
-          ),
-          const Text(
-            "Welcome Back!",
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Pallete.whiteColor,
+        child: SingleChildScrollView(
+          child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            const SizedBox(
+              height: 80,
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Text(
-            "please sign in to your account",
-            style: TextStyle(
-              fontSize: 14,
-              color: Pallete.greyColor,
+            const Text(
+              "Welcome Back!",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Pallete.whiteColor,
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  CustomTextField(
-                    controller: _emailController,
-                    validator: emailValidator,
-                    hintText: "Email",
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  CustomPasswordField(
-                    controller: _passwordController,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.90,
-                    alignment: Alignment.topRight,
-                    child: const Text("Forget Password?",
-                        style: TextStyle(
-                          color: Pallete.greyColor,
-                          fontSize: 14,
-                        )),
-                  ),
-                  const SizedBox(
-                    height: 80,
-                  ),
-                  AuthButton(
-                    onPressed: signInWithEmail,
-                    text: "Sign In",
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  const GoogleLoginButton(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Don't have an account?",
-                        style: TextStyle(
-                          color: Pallete.whiteColor,
-                          fontSize: 14,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () => navigateToSignUpScreen(context),
-                        child: const Text(
-                          "Sign Up",
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              "please sign in to your account",
+              style: TextStyle(
+                fontSize: 14,
+                color: Pallete.greyColor,
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    CustomTextField(
+                      controller: _emailController,
+                      validator: emailValidator,
+                      hintText: "Email",
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomPasswordField(
+                      controller: _passwordController,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.90,
+                      alignment: Alignment.topRight,
+                      child: const Text("Forget Password?",
                           style: TextStyle(
-                            color: Pallete.purpleColor,
+                            color: Pallete.greyColor,
                             fontSize: 14,
-                            fontWeight: FontWeight.bold,
+                          )),
+                    ),
+                    const SizedBox(
+                      height: 80,
+                    ),
+                    AuthButton(
+                      onPressed: signInWithEmail,
+                      text: "Sign In",
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const GoogleLoginButton(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Don't have an account?",
+                          style: TextStyle(
+                            color: Pallete.whiteColor,
+                            fontSize: 14,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ))
-        ]),
+                        TextButton(
+                          onPressed: () => navigateToSignUpScreen(context),
+                          child: const Text(
+                            "Sign Up",
+                            style: TextStyle(
+                              color: Pallete.purpleColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ))
+          ]),
+        ),
       ),
     ));
   }

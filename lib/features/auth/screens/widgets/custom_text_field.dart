@@ -25,6 +25,7 @@ class CustomTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextFormField(
+        scrollPadding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         controller: controller,
         decoration: InputDecoration(
           hintText: hintText,

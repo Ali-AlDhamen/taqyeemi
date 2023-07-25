@@ -44,6 +44,7 @@ class InstructorModal extends ConsumerWidget {
             ),
             const SizedBox(height: 10),
             TextField(
+              scrollPadding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
               controller: courseCodeController,
               cursorColor: Pallete.purpleColor,
               decoration: const InputDecoration(
@@ -298,6 +299,7 @@ class InstructorModal extends ConsumerWidget {
             const SizedBox(height: 10),
 
             TextField(
+            scrollPadding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
               controller: commentController,
               cursorColor: Pallete.purpleColor,
               decoration: const InputDecoration(

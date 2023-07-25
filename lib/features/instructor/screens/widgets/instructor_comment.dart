@@ -77,7 +77,7 @@ class InstructorCommentWidget extends StatelessWidget {
                 child: Center(
                   child: Text(
                     "Attendance ${comment.attendance}%",
-                    style: TextStyle(color: textInstructorPrecentageColor(comment.attendance + 0.0), fontSize: 10),
+                    style: TextStyle(color: textInstructorPrecentageColor(comment.attendance + 0.0), fontSize: 8),
                   ),
                 ),
               ),
@@ -95,7 +95,7 @@ class InstructorCommentWidget extends StatelessWidget {
                     "Treating ${comment.treating}%",
                     style: TextStyle(
                       color: textInstructorPrecentageColor(comment.treating + 0.0),
-                      fontSize: 10,
+                      fontSize: 8,
                     ),
                   ),
                 ),
@@ -114,7 +114,7 @@ class InstructorCommentWidget extends StatelessWidget {
                     "Teaching ${comment.teaching}%",
                     style: TextStyle(
                       color: textInstructorPrecentageColor(comment.teaching + 0.0),
-                      fontSize: 10,
+                      fontSize: 8,
                     ),
                   ),
                 ),
@@ -133,7 +133,7 @@ class InstructorCommentWidget extends StatelessWidget {
                     "Grading ${comment.grading}%",
                     style: TextStyle(
                       color: textInstructorPrecentageColor(comment.grading + 0.0),
-                      fontSize: 10,
+                      fontSize: 8,
                     ),
                   ),
                 ),

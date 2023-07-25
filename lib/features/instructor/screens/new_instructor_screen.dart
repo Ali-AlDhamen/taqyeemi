@@ -67,6 +67,7 @@ class _NewInstructorScreenState extends ConsumerState<NewInstructorScreen> {
             ),
             const SizedBox(height: 10),
             TextField(
+              scrollPadding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
               controller: _instructorNameController,
               decoration: const InputDecoration(
                 hintText: 'Enter instructor name',

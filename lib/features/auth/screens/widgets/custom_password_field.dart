@@ -26,6 +26,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextFormField(
+        scrollPadding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         obscureText: !_passwordVisible,
         controller: widget.controller,
         decoration: InputDecoration(

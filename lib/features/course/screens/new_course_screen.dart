@@ -59,6 +59,7 @@ class _NewCourseScreenState extends ConsumerState<NewCourseScreen> {
               ),
               const SizedBox(height: 10),
               TextField(
+                scrollPadding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                 controller: _courseNameController,
                 decoration: const InputDecoration(
                   hintText: 'course name e.g intro to programming',
@@ -77,6 +78,7 @@ class _NewCourseScreenState extends ConsumerState<NewCourseScreen> {
               ),
               const SizedBox(height: 10),
               TextField(
+                scrollPadding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                 controller: _courseCodeController,
                 decoration: const InputDecoration(
                   hintText: 'course code e.g CS101',

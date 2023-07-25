@@ -136,7 +136,7 @@ class _InstructorScreenState extends ConsumerState<InstructorScreen> {
                 children: [
                   Container(
                     margin: const EdgeInsets.all(10),
-                    height: height * 0.4,
+  
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: Pallete.grayColor,

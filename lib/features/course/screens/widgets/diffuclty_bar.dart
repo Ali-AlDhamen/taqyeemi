@@ -14,18 +14,22 @@ class DifficultyBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(diffuclty.diffuclty),
-          const SizedBox(width: 10),
           SizedBox(
-            width: 300,
-            child: StepProgressIndicator(
-              padding: 0,
-              totalSteps: 100,
-              currentStep: (diffuclty.precentage * 100 ).toInt(),
-              size: 15,
-              selectedColor: diffuclty.color,
-              unselectedColor: Colors.grey,
-              roundedEdges:  const Radius.circular(10),
+            width: 100,
+            child: Text(diffuclty.diffuclty)),
+      
+          Expanded(
+            child: SizedBox(
+              
+              child: StepProgressIndicator(
+                padding: 0,
+                totalSteps: 100,
+                currentStep: (diffuclty.precentage * 100).toInt(),
+                size: 15,
+                selectedColor: diffuclty.color,
+                unselectedColor: Colors.grey,
+                roundedEdges: const Radius.circular(10),
+              ),
             ),
           ),
         ],
