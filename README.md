@@ -34,6 +34,10 @@ To run Taqyeemi on your device, follow these steps:
  
 3. Run the app on your preferred emulator or physical device using Flutter's development tools.
 
+## APK FILE FOR ANDROID
+
+https://drive.google.com/file/d/1KNI9BNI5_YtGT5A7eFgmsJTzgLt7Be8E/view?usp=drive_link
+
 
 
 Thank you for choosing Taqyeemi to enhance your learning journey! We hope you find the app valuable and enjoy using it. Happy learning! 📚🚀
