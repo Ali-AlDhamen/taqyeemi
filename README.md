@@ -36,7 +36,7 @@ To run Taqyeemi on your device, follow these steps:
 
 ## APK FILE FOR ANDROID
 
-https://drive.google.com/file/d/1KNI9BNI5_YtGT5A7eFgmsJTzgLt7Be8E/view?usp=drive_link
+[https://drive.google.com/file/d/1KNI9BNI5_YtGT5A7eFgmsJTzgLt7Be8E/view?usp=drive_link](https://drive.google.com/file/d/1sXU2VjXg39YqslczFGcmoEs4nLwe2mQk/view?usp=drive_link)
 
 
 
