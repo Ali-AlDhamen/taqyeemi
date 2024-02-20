@@ -41,6 +41,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   chat_bubbles: ^1.4.0
   flutter_dotenv: ^5.1.0
+  dart_openai: ^3.0.0
 
 dev_dependencies:
   flutter_test:
