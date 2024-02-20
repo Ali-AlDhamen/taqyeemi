@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
@@ -80,7 +81,7 @@ class CourseRepository {
     });
   }
 
-  Future<String> getCoursesDataFormated() async {
+  Future<String> getCoursesDataFormatted() async {
     final coursesDocs = await _courses.get();
     final courses = coursesDocs.docs.map((doc) {
       return Course.fromMap(doc.data() as Map<String, dynamic>);
@@ -88,7 +89,7 @@ class CourseRepository {
 
     String coursesData = '';
     for (var course in courses) {
-      coursesData += 'Course : ${course.name}\n';
+      coursesData += 'Course : ${course.name} (${course.code})\n';
       double average = getCourseAverageInNumber(course.comments);
       average = (average * 100).round() / 100;
       double difficulty = getCourseDiffucltyInNumber(course.comments);
@@ -101,6 +102,10 @@ class CourseRepository {
       }
       coursesData += '\n';
     }
+    // print 500 characters each time until end
+    // for (var i = 0; i < coursesData.length; i += 500) {
+    //   print(coursesData.substring(i, min(i + 500, coursesData.length)));
+    // }
     return coursesData;
   }
 }

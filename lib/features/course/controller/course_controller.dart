@@ -71,13 +71,14 @@ class CourseController extends StateNotifier<bool> {
     final user = _ref.read(userProvider)!;
 
     CourseComment courseComment = CourseComment(
-        id: "${course.name}${DateTime.now()}",
-        comment: comment,
-        difficulty: diffuclty,
-        grade: grade,
-        userId: user.userId,
-        courseId: course.id,
-        date: DateTime.now());
+      id: "${course.name}${DateTime.now()}",
+      comment: comment,
+      difficulty: diffuclty,
+      grade: grade,
+      userId: user.userId,
+      courseId: course.id,
+      date: DateTime.now(),
+    );
 
     final result =
         await _courseRepository.addComment(courseComment, course.name);
@@ -92,9 +93,9 @@ class CourseController extends StateNotifier<bool> {
     return _courseRepository.searchCourses(query);
   }
 
-  Future<String> getCoursesDataFormated() async {
+  Future<String> getCoursesDataFormatted() async {
     state = true;
-    final data = await _courseRepository.getCoursesDataFormated();
+    final data = await _courseRepository.getCoursesDataFormatted();
     state = false;
     return data;
   }

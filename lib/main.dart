@@ -1,22 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:firebase_core/firebase_core.dart';
 
-
-import 'features/course/screens/new_course_screen.dart';
-import 'features/instructor/screens/instructor_screen.dart';
 import 'core/core.dart';
 import 'features/auth/controller/auth_controller.dart';
-import 'features/course/screens/course_screen.dart';
-import 'features/home/screens/home_screen.dart';
 import 'features/auth/screens/login_screen.dart';
 import 'features/auth/screens/signup_screen.dart';
+import 'features/course/screens/course_screen.dart';
+import 'features/course/screens/new_course_screen.dart';
+import 'features/home/screens/home_screen.dart';
+import 'features/instructor/screens/instructor_screen.dart';
 import 'features/instructor/screens/new_instructor_screen.dart';
 import 'firebase_options.dart';
-import 'theme/pallete.dart';
 import 'models/user_model.dart';
+import 'theme/pallete.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -69,7 +68,8 @@ class _MyAppState extends ConsumerState<MyApp> {
         NewCourseScreen.routeName: (context) => const NewCourseScreen(),
         CourseScreen.routeName: (context) =>
             CourseScreen(ModalRoute.of(context)!.settings.arguments as String),
-        InstructorScreen.routeName: (context) =>  InstructorScreen(name: ModalRoute.of(context)!.settings.arguments as String),
+        InstructorScreen.routeName: (context) => InstructorScreen(
+            name: ModalRoute.of(context)!.settings.arguments as String),
       },
     );
   }
