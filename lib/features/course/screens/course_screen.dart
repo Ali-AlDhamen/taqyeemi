@@ -44,9 +44,7 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     final isLoading = ref.watch(courseControllerProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.name),

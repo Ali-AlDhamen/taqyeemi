@@ -102,10 +102,6 @@ class CourseRepository {
       }
       coursesData += '\n';
     }
-    // print 500 characters each time until end
-    // for (var i = 0; i < coursesData.length; i += 500) {
-    //   print(coursesData.substring(i, min(i + 500, coursesData.length)));
-    // }
     return coursesData;
   }
 }
