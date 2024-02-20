@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taqyeemi/core/core.dart';
+import 'package:taqyeemi/features/gpt/repository/gpt_repository.dart';
 import 'package:taqyeemi/features/gpt/screens/widgets/chat_messages.dart';
 import 'package:taqyeemi/features/gpt/screens/widgets/suggestion_message.dart';
 import 'package:taqyeemi/models/messge_model.dart';
@@ -25,7 +26,15 @@ class _TaqyeemiGPTScreenState extends ConsumerState<TaqyeemiGPTScreen> {
   @override
   void dispose() {
     _textEditingController.dispose();
+
     super.dispose();
+  }
+
+  @override
+  void deactivate() {
+    ref.read(gptRepositoryProvider).messages =
+        ref.read(gptRepositoryProvider).messages.sublist(0, 1);
+    super.deactivate();
   }
 
   void sendMessage(String message) async {
@@ -75,13 +84,14 @@ class _TaqyeemiGPTScreenState extends ConsumerState<TaqyeemiGPTScreen> {
                   SuggestionMessage(
                     "Who is the best instructor?",
                     sendMessage,
+                    isLoading
                   ),
                   SuggestionMessage(
-                      "How can I get a good grade in physics?", sendMessage),
+                      "How do i secure A+ in biology based off students", sendMessage, isLoading),
                   SuggestionMessage(
-                      "Which course has highest average?", sendMessage),
+                      "Which course has highest average?", sendMessage, isLoading),
                   SuggestionMessage(
-                      "What students think of Ali AlDhamen?", sendMessage),
+                      "What students think of Ali AlDhamen?", sendMessage, isLoading),
                   const SizedBox(height: 10),
                   Expanded(
                     child: ListView.builder(
@@ -139,23 +149,26 @@ class _TaqyeemiGPTScreenState extends ConsumerState<TaqyeemiGPTScreen> {
                     ),
                     const SizedBox(width: 8),
                     // Icon button send message
-                    IconButton(
-                      onPressed: _textEditingController.text.isEmpty
-                          ? null
-                          : () {
-                              sendMessage(_textEditingController.text);
-                            },
-                      icon: isLoading
-                          ? const Loader(
-                              color: Pallete.purpleColor,
-                            )
-                          : Icon(
-                              Icons.send,
-                              size: 30,
-                              color: _textEditingController.text.isEmpty
-                                  ? Colors.grey
-                                  : Pallete.purpleColor,
-                            ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 35.0),
+                      child: IconButton(
+                        onPressed: _textEditingController.text.isEmpty
+                            ? null
+                            : () {
+                                sendMessage(_textEditingController.text);
+                              },
+                        icon: isLoading
+                            ? const Loader(
+                                color: Pallete.purpleColor,
+                              )
+                            : Icon(
+                                Icons.send,
+                                size: 30,
+                                color: _textEditingController.text.isEmpty
+                                    ? Colors.grey
+                                    : Pallete.purpleColor,
+                              ),
+                      ),
                     ),
                   ],
                 ),
