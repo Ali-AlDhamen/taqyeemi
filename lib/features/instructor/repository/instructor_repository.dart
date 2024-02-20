@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
@@ -84,7 +85,7 @@ class InstructorRepository {
     });
   }
 
-  Future<String> getInstructorsDataFormated() async {
+  Future<String> getInstructorsDataFormatted() async {
     final instructorsDocs = await _instructor.get();
     final instructors = instructorsDocs.docs.map((doc) {
       return Instructor.fromMap(doc.data() as Map<String, dynamic>);
@@ -96,7 +97,7 @@ class InstructorRepository {
       final data = getInstructorStats(instructors[i].comments);
       final sum = data.reduce((value, element) => value + element);
       instructorsData += 'his grading level: ${data[0]}%\n';
-      instructorsData += 'his forgivness level at attendance: ${data[1]}%\n';
+      instructorsData += 'his forgiveness level at attendance: ${data[1]}%\n';
       instructorsData += 'his teaching skills: ${data[2]}%\n';
       instructorsData += 'his kindness level: ${data[3]}%\n';
       instructorsData += 'his overall level: ${sum / data.length}%\n';
@@ -105,6 +106,7 @@ class InstructorRepository {
         instructorsData += '${comment.comment}\n';
       }
     }
+    
     return instructorsData;
   }
 }

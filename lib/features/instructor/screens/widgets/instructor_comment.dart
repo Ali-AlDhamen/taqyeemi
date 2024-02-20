@@ -92,7 +92,7 @@ class InstructorCommentWidget extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    "Treating ${comment.treating}%",
+                    "Attitude ${comment.treating}%",
                     style: TextStyle(
                       color: textInstructorPrecentageColor(comment.treating + 0.0),
                       fontSize: 8,

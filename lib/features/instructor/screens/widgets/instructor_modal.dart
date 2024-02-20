@@ -108,7 +108,7 @@ class InstructorModal extends ConsumerWidget {
             ),
             const Align(
               alignment: Alignment.topLeft,
-              child: Text('instuctor teaching'),
+              child: Text('Instructor Teaching'),
             ),
             const SizedBox(height: 10),
             CustomRadioButton(
@@ -154,7 +154,7 @@ class InstructorModal extends ConsumerWidget {
             ),
             const Align(
               alignment: Alignment.topLeft,
-              child: Text('instuctor treating'),
+              child: Text('Instructor Attitude'),
             ),
             const SizedBox(height: 10),
             CustomRadioButton(
@@ -200,7 +200,7 @@ class InstructorModal extends ConsumerWidget {
             ),
             const Align(
               alignment: Alignment.topLeft,
-              child: Text('instuctor grading'),
+              child: Text('Instructor Grading'),
             ),
             const SizedBox(height: 10),
             CustomRadioButton(
@@ -246,7 +246,7 @@ class InstructorModal extends ConsumerWidget {
             ),
             const Align(
               alignment: Alignment.topLeft,
-              child: Text('instuctor attendance'),
+              child: Text('Instructor Attendance'),
             ),
             const SizedBox(height: 10),
             CustomRadioButton(

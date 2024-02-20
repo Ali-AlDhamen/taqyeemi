@@ -92,7 +92,6 @@ class InstructorController extends StateNotifier<bool> {
       date: DateTime.now(),
     );
 
-    await Future.delayed(const Duration(seconds: 2));
 
     final result = await _instructorRepository.addComment(instructorComment);
     state = false;
@@ -116,9 +115,9 @@ class InstructorController extends StateNotifier<bool> {
     return _instructorRepository.getInstructorByName(name);
   }
 
-  Future<String> getInstructorsDataFormated() {
+  Future<String> getInstructorsDataFormatted() {
     state = true;
-    final data = _instructorRepository.getInstructorsDataFormated();
+    final data = _instructorRepository.getInstructorsDataFormatted();
     state = false;
     return data;
   }

@@ -123,7 +123,6 @@ class _InstructorScreenState extends ConsumerState<InstructorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     final isLoading = ref.watch(instructorControllerProvider);
     return Scaffold(
       appBar: AppBar(
@@ -197,7 +196,7 @@ class _InstructorScreenState extends ConsumerState<InstructorScreen> {
                         ),
                         InstructorBar(
                           instructor: instructor,
-                          type: "Treating",
+                          type: "Attitude",
                         ),
                         InstructorBar(
                           instructor: instructor,
